@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
+import { BrowserRouter, Switch, Route} from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
+import './styles'
+import './scripts'
+import IndexView from './views/IndexView'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <IndexView />
   </React.StrictMode>,
   document.getElementById('root')
 );
