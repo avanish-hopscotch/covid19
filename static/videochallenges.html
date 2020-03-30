@@ -48,34 +48,17 @@
             </div>
           </div>
           <div class="w-dyn-list">
-            <div class="w-dyn-items">
-              <div class="w-dyn-item">
-                <div class="w-row">
-                  <div class="w-col w-col-6"><img src="images/03.svg" height="180" width="244" alt=""></div>
-                  <div class="column-5 w-col w-col-6"><a href="image-license-info.html" class="link-3"><strong class="bold-text-7">Coronavirus Hygiene 101</strong></a>
-                    <div class="text-block-7"> 246 recorders already</div><a href="#" class="button-9 w-button"><span>Record now</span></a></div>
+              <div class="w-dyn-items">
+                <div class="w-dyn-item firebaseData">
+  
                 </div>
               </div>
-            </div>
-            <div class="w-dyn-empty">
-              <div>No items found.</div>
-            </div>
-          </div>
-        </div>
-        <div class="w-dyn-list">
-          <div class="w-dyn-items">
-            <div class="w-dyn-item">
-              <div class="w-row">
-                <div class="column-10 w-col w-col-6"><img src="images/01.svg" height="189" alt=""></div>
-                <div class="column-6 w-col w-col-6"><a href="#" class="link-5"><strong class="bold-text-8">Post a selfie with a mask </strong></a>
-                  <div class="text-block-8">125 recorders already </div><a href="#" class="button-8 w-button">Record now</a></div>
+              <div hidden class="w-dyn-empty">
+                <div>No items found.</div>
               </div>
             </div>
-          </div>
-          <div class="w-dyn-empty">
-            <div>No items found.</div>
-          </div>
-        </div>
+
+      
       </div>
       <div data-duration-in="300" data-duration-out="100" class="w-tabs">
         <div class="w-tab-content">
@@ -84,22 +67,33 @@
       </div>
     </div>
   </div>
-  <div class="w-dyn-list">
-    <div class="w-dyn-items">
-      <div class="w-dyn-item">
-        <div class="columns-5 w-row">
-          <div class="column-7 w-col w-col-6"><img src="images/02.svg" height="180" alt="" class="image-5"></div>
-          <div class="column-9 w-col w-col-6"><a href="#" class="link-6"><strong class="bold-text-9">Record this 5-point PSA for your friends and family</strong></a>
-            <div class="text-block-9">178 recorders already</div><a href="#" class="button-10 w-button">Record now</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="w-dyn-empty">
-      <div>No items found.</div>
-    </div>
-  </div>
+
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5e7b277866961175c2624628" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
+  <script src="js/config.js" />
+  <script>
+    var firebaseConfig = firebase_config;
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script>
+    $(document).ready(function () {
+      firebase.firestore().collection("videochallenge").get().then(function (querySnapshot) {
+        if (querySnapshot.docs.length == 0) {
+          $('.w-dyn-empty').show();
+        }
+        querySnapshot.forEach(snapItem => {
+          if (snapItem.exists) {
+            const data = snapItem.data();
+                $('.firebaseData').append('<div class="w-row"><div class="w-col w-col-6"><img src=' + data.image_url + ' height="180" alt=""></div><div class="column-5 w-col w-col-6"><a href="#" class="link-3"> <strong class="bold-text-7">' + data.title + '</strong> </a><div class="text-block-7">' + data.text + '</div><a href="#" class="button-9 w-button"><span>' + data.button_text + '</span></a></div></div>'
+            );
+         
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
