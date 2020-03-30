@@ -5007,7 +5007,7 @@ p {
   }
   .hero-image {
     height: 200px;
-    background-size: 300px;
+    background-size: 300px 180px;
   }
   .bold-text-4 {
     color: #4d4d4d;
