@@ -28,7 +28,7 @@
         <div class="nav-flex">
           <div><img src="images/New-Hopscotch-Logo_Black.png" width="66" srcset="images/New-Hopscotch-Logo_Black-p-500.png 500w, images/New-Hopscotch-Logo_Black-p-800.png 800w, images/New-Hopscotch-Logo_Black-p-1080.png 1080w, images/New-Hopscotch-Logo_Black-p-1600.png 1600w, images/New-Hopscotch-Logo_Black-p-2000.png 2000w, images/New-Hopscotch-Logo_Black-p-2600.png 2600w, images/New-Hopscotch-Logo_Black.png 2925w" sizes="66px" alt=""></div>
           <div class="link-block-flex">
-            <nav role="navigation" class="nav-menu w-nav-menu"><a href="index.html" class="nav-link w-nav-link">Home</a><a href="videochallenges.html" aria-current="page" class="nav-link w-nav-link w--current">video challengeS</a><a href="videolibrary.html" class="nav-link w-nav-link">video library</a><a href="videolibrary.html" class="nav-link w-nav-link">LOGIN</a></nav>
+            <nav role="navigation" class="nav-menu w-nav-menu"><a href="index.html" class="nav-link w-nav-link">Home</a><a href="videochallenges.html" aria-current="page" class="nav-link w-nav-link w--current">video challengeS</a><a href="videolibrary.html" class="nav-link w-nav-link">video library</a><a href="../login/index.html" class="nav-link w-nav-link">LOGIN</a></nav>
             <div class="nav-menu">
               <div class="menu-button w-nav-button">
                 <div class="icon-2 w-icon-nav-menu"></div>
@@ -83,13 +83,21 @@
         querySnapshot.forEach(snapItem => {
           if (snapItem.exists) {
             const data = snapItem.data();
-                $('.firebaseData').append('<div class="w-row"><div class="w-col w-col-6"><img src=' + data.image_url + ' height="180" alt=""></div><div class="column-5 w-col w-col-6"><a href="#" class="link-3"> <strong class="bold-text-7">' + data.title + '</strong> </a><div class="text-block-7">' + data.text + '</div><a href="#" class="button-9 w-button"><span>' + data.button_text + '</span></a></div></div>'
+                $('.firebaseData').append('<div class="w-row"><div class="w-col w-col-6"><img src=' + data.image_url + ' height="180" alt=""></div><div class="column-5 w-col w-col-6"><a href="#" onclick="individualChallenge(\'' + snapItem.id + '\')"   class="link-3"> <strong class="bold-text-7">' + data.title + '</strong> </a><div class="text-block-7">' + data.text + '</div><div onclick="goToRecorderApp(\'' + data.psaId + '\')" class="button-9 w-button"><span>' + data.button_text + '</span></div></div>'
             );
          
           }
         });
       });
+	
     });
+	  function goToRecorderApp(psaId){
+	    window.location.href = `${window.location.origin}/recorder/index.html#/recorder/?id=${psaId}`
+		}
+		 function individualChallenge(id){
+	    window.location.href = `detail_individualvideochallenge.html?id=${id}`;
+		}
+		
   </script>
 </body>
 </html>
