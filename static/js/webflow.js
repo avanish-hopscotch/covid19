@@ -59279,8 +59279,8 @@ var CHECKOUT_ERRORS = {
   },
   EXTRAS: {
     id: ORDER_EXTRAS_ERR,
-    name: 'Tax or shipping changed',
-    msg: 'Taxes or shipping methods have changed. Please refresh this page and try again.',
+    name: 'Merchant setting changed',
+    msg: 'A merchant setting has changed that impacts your cart. Please refresh and try again.',
     path: ['data', 'commerce', ORDER_EXTRAS_ERR],
     requiresRefresh: true
   },
