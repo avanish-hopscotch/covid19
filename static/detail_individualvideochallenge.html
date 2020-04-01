@@ -70,9 +70,9 @@ function getParameterByName(name) {
           $('.w-dyn-empty').show();
         }else{
 		 const data = querySnapshot.data();
-          data.data.forEach(item => {
+       const item=data.data;
                 $('.firebaseData').append('<div class="columns-6 w-row"><div class="column-8 w-col w-col-6"><div class="text-block-21">'+item.title+'</div><img src="'+item.image_url+'" alt=""><h3 class="heading-18">'+item.sub_title+'</h3><div class="text-block-17">'+item.created_by+'</div><div class="text-block-18">'+item.shared+' users shared this already</div><div class="text-block-16">Date released: '+item.release_date.toDate().toLocaleDateString()+'</div><div class="text-block-19">'+item.challenge_len+'</div><p class="paragraph-8">'+item.text+'</p></div> <div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src='+item.video_url+'" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div></div>');
-				});
+				
        
          
           }
