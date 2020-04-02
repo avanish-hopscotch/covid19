@@ -58,48 +58,21 @@
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
   <script src="js/config.js"></script>
   <script>
-    var userLogin=false;
-	$(document).ready(function () {
-	var me =this;
-	 firebase.auth().onAuthStateChanged((user) => {
-	 
-        if (user) {
-		userLogin=true;
-		   }else{
-		 userLogin=false;
-		   }  
-		 firebase.firestore().collection("videolibrary").get().then(function (querySnapshot) {
+    $(document).ready(function () {
+      firebase.firestore().collection("videolibrary").get().then(function (querySnapshot) {
         if (querySnapshot.docs.length == 0) {
           $('.w-dyn-empty').show();
         }
         querySnapshot.forEach(snapItem => {
           if (snapItem.exists) {
             const element = snapItem.data();
-              $('.firebaseData').append('<div class="collection-item-2 w-dyn-item w-col w-col-4"><div class="w-container"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="'+element.video_url+'" scrolling="no" title="'+element.video_dec+'" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div><div class="text-block-11">'+element.video_text+'</div><h3 class="heading-15">'+element.video_title+'</h3><div  onclick="goToShareApp(\'' + snapItem.id + '\')" class="button-11 w-button">Share</div></div></div>'
+              $('.firebaseData').append('<div class="collection-item-2 w-dyn-item w-col w-col-4"><div class="w-container"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="'+element.video_url+'" scrolling="no" title="'+element.video_dec+'" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div><div class="text-block-11">'+element.video_text+'</div><h3 class="heading-15">'+element.video_title+'</h3><a href="#" class="button-11 w-button">Share</a></div></div>'
             );
          
           }
-        });	  
-	  })
-	  
-	     
+        });
       });
-	  
- 
-
-	   
     });
-	 function goToShareApp(id){
-	if(!userLogin){
-	if (confirm('Login into the app')) {
-	 window.location.href = `../login/index.html`;
-    // Save it!
-	}
-	}
-	else{
-	 window.location.href = `../share/index.html#/videolibrary/${id}`;
-	 }
-		}
   </script>
 </body>
 </html>
