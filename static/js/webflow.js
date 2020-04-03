@@ -621,6 +621,8 @@ var _exportNames = {
   INVENTORY_TYPE_FINITE: true,
   INVENTORY_TYPE_INFINITE: true,
   INFINITE_INVENTORY: true,
+  MAX_TOTAL_ORDER_PRICE: true,
+  MAX_PRODUCT_DIMENSION: true,
   PRICE_TEMPLATE_CURRENCY_SYMBOL: true,
   PRICE_TEMPLATE_AMOUNT: true,
   PRICE_TEMPLATE_CURRENCY_CODE: true,
@@ -629,7 +631,7 @@ var _exportNames = {
   CSV_CURRENCY_TEMPLATE: true,
   CSV_INTEGRATION_CURRENCY_TEMPLATE: true
 };
-exports.CSV_INTEGRATION_CURRENCY_TEMPLATE = exports.CSV_CURRENCY_TEMPLATE = exports.DEFAULT_PRICE_TEMPLATE_VALUE = exports.PRICE_TEMPLATE_OPTIONS = exports.PRICE_TEMPLATE_CURRENCY_CODE = exports.PRICE_TEMPLATE_AMOUNT = exports.PRICE_TEMPLATE_CURRENCY_SYMBOL = exports.INFINITE_INVENTORY = exports.INVENTORY_TYPE_INFINITE = exports.INVENTORY_TYPE_FINITE = exports.SHIPPING_METHODS = void 0;
+exports.CSV_INTEGRATION_CURRENCY_TEMPLATE = exports.CSV_CURRENCY_TEMPLATE = exports.DEFAULT_PRICE_TEMPLATE_VALUE = exports.PRICE_TEMPLATE_OPTIONS = exports.PRICE_TEMPLATE_CURRENCY_CODE = exports.PRICE_TEMPLATE_AMOUNT = exports.PRICE_TEMPLATE_CURRENCY_SYMBOL = exports.MAX_PRODUCT_DIMENSION = exports.MAX_TOTAL_ORDER_PRICE = exports.INFINITE_INVENTORY = exports.INVENTORY_TYPE_INFINITE = exports.INVENTORY_TYPE_FINITE = exports.SHIPPING_METHODS = void 0;
 
 var _objectSpread2 = _interopRequireDefault(__webpack_require__(5));
 
@@ -668,8 +670,15 @@ exports.INVENTORY_TYPE_INFINITE = INVENTORY_TYPE_INFINITE;
 var INFINITE_INVENTORY = {
   inventoryType: INVENTORY_TYPE_INFINITE,
   quantity: 0
-};
+}; // Stripe maximum charge. From stripe: The only limit to the maximum amount you can charge a customer
+// is a technical one. The amount value supports up to eight digits (e.g., a value of 99999999 for a
+// USD charge of $999,999.99).
+
 exports.INFINITE_INVENTORY = INFINITE_INVENTORY;
+var MAX_TOTAL_ORDER_PRICE = 99999999;
+exports.MAX_TOTAL_ORDER_PRICE = MAX_TOTAL_ORDER_PRICE;
+var MAX_PRODUCT_DIMENSION = 9000000000000000;
+exports.MAX_PRODUCT_DIMENSION = MAX_PRODUCT_DIMENSION;
 
 function _withDerivedValue(_ref) {
   var label = _ref.label,
@@ -30246,8 +30255,8 @@ function convertWFPriceToPaypalAmountWithBreakdown(orderPrices) {
       tax = orderPrices.tax,
       discount = orderPrices.discount;
 
-  var convertOrZero = function convertOrZero(price) {
-    return price ? convertWFPriceToPaypalAmount(price) : zeroUnitPaypal(total.unit);
+  var convertOrZero = function convertOrZero(price, scalar) {
+    return price ? convertWFPriceToPaypalAmount(price, scalar) : zeroUnitPaypal(total.unit);
   };
 
   return (0, _objectSpread2["default"])({}, convertWFPriceToPaypalAmount(total), {
@@ -30255,7 +30264,7 @@ function convertWFPriceToPaypalAmountWithBreakdown(orderPrices) {
       item_total: convertOrZero(subtotal),
       shipping: convertOrZero(shipping),
       tax_total: convertOrZero(tax),
-      discount: convertOrZero(discount)
+      discount: convertOrZero(discount, -1)
     }
   });
 }
@@ -30263,15 +30272,17 @@ function convertWFPriceToPaypalAmountWithBreakdown(orderPrices) {
  * Returns a Paypal Amount (price object).
  *
  * @param  {Price} a        Webflow price object.
+ * @param  {Number} scalar  A unitless value that we're multiplying the price by.
  * @return {PaypalAmount}   Paypal price object
  */
 
 
-function convertWFPriceToPaypalAmount(a) {
+function convertWFPriceToPaypalAmount(a, scalar) {
   // TODO:
   // - May have to account for in-country PayPal accounts only support for some currencies
   var unitInfo = getCurrencyInfoPaypal(a.unit);
-  var value = intToUnsafeFloat(a.value, unitInfo).toFixed(unitInfo.digits);
+  var wfValue = scalar ? scalePrice(a, scalar).value : a.value;
+  var value = intToUnsafeFloat(wfValue, unitInfo).toFixed(unitInfo.digits);
   return {
     currency_code: a.unit,
     value: value
@@ -55312,16 +55323,16 @@ var _interopRequireDefault = __webpack_require__(0);
 
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(11));
 
-var _DEFAULT_BREAKPOINTS_, _LARGER_BREAKPOINTS_C;
+var _DEFAULT_BREAKPOINTS_, _LARGER_BREAKPOINTS_C, _LARGER_BREAKPOINTS_W;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LARGER_BREAKPOINTS_CONFIG = exports.DEFAULT_BREAKPOINTS_CONFIG = void 0;
+exports.LARGER_BREAKPOINTS_WORDING = exports.LARGER_BREAKPOINTS_CONFIG = exports.DEFAULT_BREAKPOINTS_CONFIG = void 0;
 
 var _breakpointIds = __webpack_require__(283);
 /*
- * Data used to store breakpoints in the backend
+ * Data used to store breakpoints in the backend.
  */
 
 
@@ -55350,7 +55361,41 @@ var LARGER_BREAKPOINTS_CONFIG = (_LARGER_BREAKPOINTS_C = {}, (0, _defineProperty
 }), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_C, _breakpointIds.BREAKPOINT_ID_TINY, {
   maxWidth: 479
 }), _LARGER_BREAKPOINTS_C);
+/*
+ * Strings used to describe breakpoints in the UI and co.
+ */
+
 exports.LARGER_BREAKPOINTS_CONFIG = LARGER_BREAKPOINTS_CONFIG;
+var LARGER_BREAKPOINTS_WORDING = (_LARGER_BREAKPOINTS_W = {}, (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_XXL, {
+  label: '1920px and up',
+  description: null,
+  copy: 'Styles added here will apply at 1920px and up.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_XL, {
+  label: '1440px and up',
+  description: null,
+  copy: 'Styles added here will apply at 1440px and up, unless they’re edited at a larger breakpoint.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_LARGE, {
+  label: '1280px and up',
+  description: null,
+  copy: 'Styles added here will apply at 1280px and up, unless they’re edited at a larger breakpoint.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_MAIN, {
+  label: 'Desktop',
+  description: 'Base breakpoint',
+  copy: 'Desktop styles apply at all breakpoints, unless they’re edited at a larger or smaller breakpoint. Start your styling here.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_MEDIUM, {
+  label: 'Tablet',
+  description: '991px and down',
+  copy: 'Styles added here will apply at 991px and down, unless they’re edited at a smaller breakpoint.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_SMALL, {
+  label: 'Mobile landscape',
+  description: '767px and down',
+  copy: 'Styles added here will apply at 767px and down, unless they’re edited at a smaller breakpoint.'
+}), (0, _defineProperty2["default"])(_LARGER_BREAKPOINTS_W, _breakpointIds.BREAKPOINT_ID_TINY, {
+  label: 'Mobile portrait',
+  description: '478px and down',
+  copy: 'Styles added here will apply at 478px and down.'
+}), _LARGER_BREAKPOINTS_W);
+exports.LARGER_BREAKPOINTS_WORDING = LARGER_BREAKPOINTS_WORDING;
 
 /***/ }),
 /* 566 */
