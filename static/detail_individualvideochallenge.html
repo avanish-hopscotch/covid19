@@ -44,8 +44,13 @@
   <div>
     <div class="w-dyn-list">
       <div class="w-dyn-items">
-        <div class="w-dyn-item firebaseData">
-  
+	       <div class="columns-6 w-row">
+          <div class="firebaseData">
+           
+          </div>
+          <div class="w-col w-col-6">
+            <div style="padding-top:200%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F403262315%3Fapp_id%3D122963&dntp=1&display_name=Vimeo&url=https%3A%2F%2Fvimeo.com%2F403262315&image=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F872656005_295x166.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=vimeo" scrolling="no" title="Vimeo embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div>
+          </div>
         </div>
       </div>
       <div hidden class="w-dyn-empty">
@@ -79,7 +84,7 @@ function getParameterByName(name) {
         }else{
 		 const data = querySnapshot.data();
        const item=data.data;
-                $('.firebaseData').append('<div class="columns-6 w-row"><div class="column-8 w-col w-col-6"><div class="text-block-21">'+item.title+'</div><img src="'+item.image_url+'" alt=""><h3 class="heading-18">'+item.sub_title+'</h3><div class="text-block-17">'+item.created_by+'</div><div class="text-block-18">'+item.shared+' users shared this already</div><div class="text-block-16">Date released: '+item.release_date.toDate().toLocaleDateString()+'</div><div class="text-block-19">'+item.challenge_len+'</div><p class="paragraph-8">'+item.text+'</p></div> <div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src='+item.video_url+'" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div></div>');
+                $('.firebaseData').append('<div class="column-8 w-col w-col-6"><div class="text-block-21">'+item.title+'</div><img src="'+item.image_url+'" alt=""><h3 class="heading-18">'+item.sub_title+'</h3><div class="text-block-17">'+item.created_by+'</div><div class="text-block-18">'+item.shared+' users shared this already</div><div class="text-block-16">Date released: '+item.release_date.toDate().toLocaleDateString()+'</div><div class="text-block-19">'+item.challenge_len+'</div><p class="paragraph-8">'+item.text+'</p></div> <div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src='+item.video_url+'" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div>');
 				
        
          
