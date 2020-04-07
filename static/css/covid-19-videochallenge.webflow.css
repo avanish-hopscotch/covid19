@@ -2034,7 +2034,7 @@ p {
 .section.collections {
   position: relative;
   margin-top: 70px;
-  padding: 40px 0px 101px;
+  padding: 40px 0px;
   border-top-style: none;
   background-color: #f8f6f4;
   font-family: Montserrat, sans-serif;
@@ -3405,7 +3405,7 @@ p {
   z-index: 1000;
   display: block;
   width: 100%;
-  height: 100px;
+  height: 75px;
   padding: 0px 20px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -4337,6 +4337,7 @@ p {
 
 .heading-20 {
   color: #000;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -4347,6 +4348,7 @@ p {
 
 .heading-21 {
   color: #000;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -4357,6 +4359,7 @@ p {
 
 .heading-22 {
   color: #000;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -4365,9 +4368,21 @@ p {
   text-align: center;
 }
 
+.section-3 {
+  text-align: left;
+}
+
 .text-block-21 {
+  padding-bottom: 20px;
   color: #314dbd;
   font-size: 18px;
+}
+
+.text-block-22 {
+  padding-bottom: 20px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  text-align: center;
 }
 
 .image-6 {
@@ -4436,6 +4451,25 @@ p {
 
 .columns-7 {
   margin-top: 50px;
+}
+
+.columns-8 {
+  margin-top: 20px;
+}
+
+.text-block-23 {
+  padding-bottom: 20px;
+  color: #314dbd;
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.link-7 {
+  font-family: Montserrat, sans-serif;
+  color: #010101;
+  text-align: center;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 991px) {
@@ -5252,6 +5286,7 @@ p {
     font-size: 18px;
   }
   .heading-16 {
+    margin-top: 100px;
     padding-top: 10px;
     color: #314dbd;
     font-size: 18px;
@@ -5318,6 +5353,7 @@ p {
   .heading-20 {
     margin-bottom: 0px;
     color: #000;
+    font-size: 14px;
     text-align: center;
   }
   .paragraph-10 {
@@ -5330,6 +5366,7 @@ p {
     height: 20px;
     margin-bottom: 0px;
     color: #000;
+    font-size: 14px;
     text-align: center;
   }
   .paragraph-11 {
@@ -5341,6 +5378,8 @@ p {
   .heading-22 {
     height: 25px;
     color: #000;
+    font-size: 14px;
+    line-height: 20px;
     text-align: center;
   }
   .paragraph-12 {
@@ -5387,6 +5426,11 @@ p {
   .image-6 {
     padding-top: 10px;
   }
+  .column-13 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    background-color: #f8f6f4;
+  }
   .bold-text-10 {
     font-size: 20px;
   }
@@ -5424,6 +5468,12 @@ p {
   }
   .column-21 {
     height: 40px;
+  }
+  .columns-8 {
+    background-color: #fff;
+  }
+  .column-22 {
+    padding-top: 0px;
   }
 }
 

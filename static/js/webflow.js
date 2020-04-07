@@ -37880,7 +37880,8 @@ var SharedConfig = function () {
     misconfigured: 'misconfigured',
     unknown: 'unknown'
   };
-  api.ANALYTICS_SESSION_POLLING_FREQUENCY = 30000; // Export commonjs module
+  api.ANALYTICS_SESSION_POLLING_FREQUENCY = 30000;
+  api.TEMPLATE_GENERATION_TEMPLATE_NAME = 'Templatized Base Theme'; // Export commonjs module
 
   if ( true && module.exports) {
     module.exports = api;
