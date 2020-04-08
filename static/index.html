@@ -34,8 +34,7 @@
   <div data-collapse="medium" data-animation="default" data-duration="400" class="sticky-navbar w-nav">
     <div class="container-3 w-container">
       <div class="nav-flex">
-        <div><img src="images/New-Hopscotch-Logo_Black.png" width="66" srcset="images/New-Hopscotch-Logo_Black-p-500.png 500w, images/New-Hopscotch-Logo_Black-p-800.png 800w, images/New-Hopscotch-Logo_Black-p-1080.png 1080w, images/New-Hopscotch-Logo_Black-p-1600.png 1600w, images/New-Hopscotch-Logo_Black-p-2000.png 2000w, images/New-Hopscotch-Logo_Black-p-2600.png 2600w, images/New-Hopscotch-Logo_Black.png 2925w" sizes="66px" alt=""></div>
-        <div class="link-block-flex">
+      <div class="link-block-flex">
           <nav role="navigation" class="nav-menu w-nav-menu"><a href="index.html" aria-current="page" class="nav-link w-nav-link w--current">Home</a><a href="videochallenges.html" class="nav-link w-nav-link">video challengeS</a><a href="videolibrary.html" class="nav-link w-nav-link">video library</a><a href="../login/index.html" class="nav-link w-nav-link">LOGIN</a></nav>
           <div class="nav-menu">
             <div class="menu-button w-nav-button">
@@ -54,14 +53,15 @@
             <div style="-webkit-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="top-text hero"><strong class="bold-text-10">Covid-19 Video Challenge</strong></div>
             <h1 class="heading-24"><strong class="bold-text-11">Come together to beat Covid-19. </strong></h1>
             <p style="opacity:0;-webkit-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 40PX, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="paragraph main">Tell us what you’re doing and what it takes to stay coronavirus-free! Let’s spread the word and #flattenthecurve together!</p><a href="videochallenges.html" class="button-12 w-button">Take a video challenge</a></div>
-          <div class="w-col w-col-6"><img src="images/pixel-3699342.png" srcset="images/pixel-3699342-p-500.png 500w, images/pixel-3699342-p-800.png 800w, images/pixel-3699342-p-1080.png 1080w, images/pixel-3699342-p-1600.png 1600w, images/pixel-3699342.png 1920w" sizes="(max-width: 767px) 79vw, (max-width: 991px) 42vw, 45vw" alt=""></div>
+          <!-- <div class="w-col w-col-6"><img src="images/pixel-3699342.png" srcset="images/pixel-3699342-p-500.png 500w, images/pixel-3699342-p-800.png 800w, images/pixel-3699342-p-1080.png 1080w, images/pixel-3699342-p-1600.png 1600w, images/pixel-3699342.png 1920w" sizes="(max-width: 767px) 79vw, (max-width: 991px) 42vw, 45vw" alt=""></div> -->
         </div>
       </div>
     </div>
     <div class="section collections">
-      <div class="text-block-23">ABOUT </div>
       <div class="w-row">
-        <div class="column-11 w-col w-col-4"><img src="images/pixel-cells-3976292.png" height="" srcset="images/pixel-cells-3976292-p-500.png 500w, images/pixel-cells-3976292-p-800.png 800w, images/pixel-cells-3976292-p-1080.png 1080w, images/pixel-cells-3976292-p-1600.png 1600w, images/pixel-cells-3976292.png 1920w" sizes="(max-width: 479px) 79vw, (max-width: 767px) 87vw, (max-width: 991px) 29vw, (max-width: 6193px) 31vw, 1920px" alt="">
+  <div class="text-block-23">ABOUT </div>
+        
+    <div class="column-11 w-col w-col-4"><img src="images/pixel-cells-3976292.png" height="" srcset="images/pixel-cells-3976292-p-500.png 500w, images/pixel-cells-3976292-p-800.png 800w, images/pixel-cells-3976292-p-1080.png 1080w, images/pixel-cells-3976292-p-1600.png 1600w, images/pixel-cells-3976292.png 1920w" sizes="(max-width: 479px) 79vw, (max-width: 767px) 87vw, (max-width: 991px) 29vw, (max-width: 6193px) 31vw, 1920px" alt="">
           <h6 class="heading-20">Use your platform to make a difference</h6>
           <p class="paragraph-10">Record public service announcements created by public health experts upload it to our Video Library.</p>
         </div>
@@ -75,6 +75,9 @@
         </div>
       </div>
     </div>
+	
+	  
+	
    <div class="section-3 firebaseData">
   
     </div>
@@ -95,7 +98,7 @@
           $('.w-dyn-empty').show();
         }else{
             const data = querySnapshot.data();
-                $('.firebaseData').append(' <h2 class="heading-16"><strong>'+ data.title+' </strong></h2><div class="text-block-22"><a href="#">'+ data.video_title+'</a></div><div class="w-dyn-list"> <div class="w-dyn-items"><div class="w-dyn-item"><div class="w-row"><div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="'+ data.video_url+'" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div> <div class="w-col w-col-6"><h2 class="heading-17">'+ data.video_title+'</h2> <p class="paragraph-7">'+ data.video_text+'</p> </div> </div> </div> </div></div>'
+                $('.firebaseData').append('<h2 class="heading-16"><strong class="bold-text-12">'+ data.title+' </strong></h2><div class="text-block-22"><a href="#" class="link-7">'+ data.video_title+'</a></div><div class="w-dyn-list"><div class="w-dyn-items"><div class="w-dyn-item"><div class="w-row"><div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="'+ data.video_url+'" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div><div class="column-22 w-col w-col-6"><h2 class="heading-17">'+ data.video_title+'</h2><p class="paragraph-7">'+ data.video_text+'</p></div></div></div></div></div>'
             );
          
           }
