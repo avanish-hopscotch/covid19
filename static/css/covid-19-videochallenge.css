@@ -1964,6 +1964,7 @@ p {
   font-size: 12px;
   line-height: 22px;
   font-weight: 500;
+  text-transform: none;
 }
 
 .heading {
@@ -4506,8 +4507,10 @@ p {
   .nav-link {
     width: 100%;
     max-width: 100%;
-    border-top: 1px solid #dcdcdc;
-    border-bottom: 1px none #dcdcdc;
+    border: 1px solid #fff;
+  }
+  .nav-link.w--current {
+    border: 1px solid #fff;
   }
   .left-block {
     display: block;
@@ -4763,12 +4766,11 @@ p {
 @media screen and (max-width: 767px) {
   .hero-section {
     height: auto;
+    margin-bottom: 10px;
     padding-top: 6%;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.3)), to(hsla(0, 0%, 100%, 0.3))), url('../images/scott-webb-268893-unsplash.jpg');
-    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0.3)), url('../images/scott-webb-268893-unsplash.jpg');
-    background-position: 0px 0px, 0px 0px;
-    background-size: auto, 2080px;
-    background-repeat: repeat, repeat;
+    padding-bottom: 0px;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.3)), to(hsla(0, 0%, 100%, 0.3)));
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0.3));
   }
   .hero-section.about-us {
     height: auto;
@@ -4784,8 +4786,14 @@ p {
     height: auto;
     padding-top: 110px;
   }
+  .nav-link.w--current {
+    border: 1px solid #fff;
+  }
   .left-block {
     margin-bottom: 60px;
+  }
+  .section.collections {
+    padding-top: 20px;
   }
   .section.cta {
     background-image: -webkit-gradient(linear, left top, right top, color-stop(44%, #dbdbdb), to(hsla(0, 0%, 100%, 0))), url('../images/raul-cacho-oses-779595-unsplash-p-3200.jpeg');
@@ -4803,6 +4811,7 @@ p {
   }
   .container {
     height: auto;
+    text-align: center;
   }
   .footer-content-block {
     margin-bottom: 60px;
@@ -4820,6 +4829,7 @@ p {
   }
   .paragraph.main {
     width: 45%;
+    text-align: left;
   }
   .tab-block {
     margin-bottom: 30px;
@@ -4932,9 +4942,67 @@ p {
     height: 400px;
     background-size: 500px;
   }
+  .text-block-7 {
+    text-align: center;
+  }
+  .column-5 {
+    text-align: center;
+  }
+  .text-block-8 {
+    text-align: center;
+  }
+  .column-6 {
+    text-align: center;
+  }
+  .text-block-10 {
+    color: #314dbd;
+    font-weight: 300;
+  }
+  .text-block-11 {
+    padding-top: 10px;
+  }
+  .bold-text-8 {
+    text-align: right;
+  }
+  .heading-23 {
+    font-family: Montserrat, sans-serif;
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .column-9 {
+    text-align: center;
+  }
+  .column-10 {
+    text-align: center;
+  }
+  .column-15 {
+    padding-bottom: 10px;
+  }
+  .column-18 {
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  .column-20 {
+    padding-bottom: 10px;
+  }
+  .image-8 {
+    padding-top: 40px;
+  }
+  .video {
+    display: block;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 479px) {
+  p {
+    font-family: Montserrat, sans-serif;
+  }
   .hero-section {
     height: auto;
     padding: 0px 0px 30px;
@@ -4958,11 +5026,15 @@ p {
   }
   .nav-link {
     margin-left: 0px;
-    padding-left: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
     font-size: 8px;
     text-align: left;
   }
   .nav-link.w--current {
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 1px none #000;
     font-size: 8px;
   }
   .section {
@@ -4970,7 +5042,9 @@ p {
     padding-bottom: 0px;
   }
   .section.collections {
-    height: 850px;
+    height: 875px;
+    margin-top: 0px;
+    padding-bottom: 10px;
   }
   .section.sale-section {
     padding-bottom: 40%;
@@ -5474,6 +5548,52 @@ p {
   }
   .column-22 {
     padding-top: 0px;
+  }
+  .section-4 {
+    margin-right: 25px;
+    margin-left: 25px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-family: Montserrat, sans-serif;
+    color: #000;
+  }
+  .heading-25 {
+    color: #314dbd;
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: none;
+  }
+  .paragraph-13 {
+    font-family: 'Libre Franklin', sans-serif;
+  }
+  .column-23 {
+    font-family: Montserrat, sans-serif;
+  }
+  .paragraph-14 {
+    font-family: Montserrat, sans-serif;
+  }
+  .text-block-24 {
+    font-weight: 600;
+  }
+  .text-block-25 {
+    font-weight: 600;
+  }
+  .text-block-26 {
+    font-weight: 600;
+  }
+  .text-block-27 {
+    padding-bottom: 5px;
+    font-weight: 600;
+  }
+  .text-block-28 {
+    color: #314dbd;
+    font-weight: 500;
+  }
+  .text-block-29 {
+    padding-bottom: 5px;
+    color: #314dbd;
+    font-weight: 500;
   }
 }
 
