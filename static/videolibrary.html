@@ -76,14 +76,7 @@
   <script>
    var userLogin=false;
 	$(document).ready(function () {
-	var me =this;
-	 firebase.auth().onAuthStateChanged((user) => {
-	 
-        if (user) {
-		userLogin=true;
-		   }else{
-		 userLogin=false;
-		   }  
+	var me =this; 
 		 firebase.firestore().collection("videolibrary").get().then(function (querySnapshot) {
         if (querySnapshot.docs.length == 0) {
           $('.w-dyn-empty').show();
@@ -97,19 +90,9 @@
           }
         });	  
 	  })
-	      
-        });
       });
 	 function goToShareApp(id){
-	if(!userLogin){
-	if (confirm('Login into the app')) {
-	 window.location.href = `../login/index.html`;
-    // Save it!
-	}
-	}
-	else{
 	 window.location.href = `https://psanodeapp1.appspot.com/videolibrary/${id}`;
-	 }
 		}
   </script>
 </body>
