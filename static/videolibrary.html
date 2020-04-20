@@ -36,20 +36,30 @@
     <div data-collapse="medium" data-animation="default" data-duration="400" class="sticky-navbar w-nav">
       <div class="w-container">
         <div class="nav-flex">
-          <div class="link-block-flex">
-            <nav role="navigation" class="nav-menu w-nav-menu">
-			<a href="index.html" class="nav-link w-nav-link">Home</a>
-			<a href="videochallenges.html" class="nav-link w-nav-link">video challengeS</a>
-			<a href="videolibrary.html" aria-current="page" class="nav-link w-nav-link w--current">video library</a>
-			<a href="faqs.html"  class="nav-link w-nav-link w">FAQs</a>
-			<a href="../login/index.html" aria-current="page" class="nav-link w-nav-link w--current">LOGIN</a>
-			</nav>
-            <div class="nav-menu">
-              <div class="menu-button w-nav-button">
-                <div class="icon-2 w-icon-nav-menu"></div>
+            <div class="dropdown">
+                <button onclick="openLang()" class="btn btn-block black-button dropbtn">Language</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a onclick="languageChange('en')">English</a>
+                  <a onclick="languageChange('hi')">Hindi</a>
+                  <a onclick="languageChange('ma')">Marathi</a>
+                  <a onclick="languageChange('be')">Bengali</a>
+                  <a onclick="languageChange('ta')">Tamil</a>
+                </div>
               </div>
-            </div>
-          </div>
+              <div class="link-block-flex" style="width: 100%;">
+                <nav role="navigation" class="nav-menu w-nav-menu">
+                  <a href="index.html" class="nav-link w-nav-link" id="nav_home">Home</a>
+                  <a href="videochallenges.html"class="nav-link w-nav-link " id="nav_challenge">video challengeS</a>
+                  <a href="videolibrary.html"  aria-current="page"  class="nav-link w-nav-link w--current" id="nav_library">video library</a>
+                  <a href="faqs.html" class="nav-link w-nav-link w" id="nav_faq">FAQs</a>
+                  <a href="../login/index.html" class="nav-link w-nav-link" id="nav_login">LOGIN</a>
+                </nav>
+                <div class="nav-menu">
+                  <div class="menu-button w-nav-button">
+                    <div class="icon-2 w-icon-nav-menu"></div>
+                  </div>
+                </div>
+              </div>
         </div>
       </div>
     </div>
@@ -74,12 +84,132 @@
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
   <script src="js/config.js"></script>
   <script>
-   var userLogin=false;
-	$(document).ready(function () {
-	var me =this; 
-		 firebase.firestore().collection("videolibrary").get().then(function (querySnapshot) {
-        if (querySnapshot.docs.length == 0) {
+	 function goToShareApp(id){
+	 window.location.href = `https://psanodeapp1.appspot.com/videolibrary/${id}`;
+    }
+    
+     $(document).ready(function () {
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+
+    if (localStorage.getItem("language")) {
+      updateContent(localStorage.getItem("language"));
+    } else {
+      updateContent('en');
+
+    }
+
+  })
+      function goToRecorderApp(psaId) {
+        window.location.href = `${window.location.origin}/recorder/index.html#/recorder/?id=${psaId}`
+      }
+      function individualChallenge(id) {
+        window.location.href = `detail_individualvideochallenge.html?id=${id}`;
+      }
+      function openLang() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      function languageChange(value) {
+        localStorage.setItem("language", value);
+        updateContent(value);
+      }
+      function updateContent(lang) {
+        libData(lang);
+        var en = {
+          "menu": {
+            "home": "HOME",
+            "video_challenge": "VIDEO CHALLENGES",
+            "video_library": "VIDEO LIBRARY",
+            "faq": "FAQS",
+            "login": "LOGIN"
+          }
+        }
+
+        var hi = {
+          "menu": {
+            "home": "घर",
+            "video_challenge": "वीडियो चुनौती",
+            "video_library": "वीडियो पुस्तकालय",
+            "faq": "सामान्य प्रश्नोत्तर",
+            "login": "लॉग इन करें"
+          }
+         
+        }
+
+        var ma = {
+          "menu": {
+            "home": "सुरुवात",
+            "video_challenge": " व्हिडियो आव्हान",
+            "video_library": "सगळे व्हिडिओस",
+            "faq": "प्रश्नांचे उत्तर",
+            "login": "लॉगिन"
+          }     
+        }
+
+
+        var be = {
+          "menu": {
+            "home": "হোমপেজে যান",
+            "video_challenge": "ভিডিও চ্যালেঞ্জগুলো",
+            "video_library": "ভিডিও সংকলন",
+            "faq": "কিছু সাধারন প্রশ্নের উত্তর",
+            "login": "লগ-ইন"
+          }     
+        }
+
+        var ta = {
+          "menu": {
+            "home": "হোমপেজে যান",
+            "video_challenge": "ভিডিও চ্যালেঞ্জগুলো",
+            "video_library": "ভিডিও সংকলন",
+            "faq": "কিছু সাধারন প্রশ্নের উত্তর",
+            "login": "লগ-ইন"
+          }   
+        }
+        selectLang = en;
+        switch (lang) {
+          case "en":
+            selectLang = en;
+            break;
+          case "hi":
+            selectLang = hi;
+            break;
+          case "ma":
+            selectLang = ma;
+            break;
+          case "be":
+            selectLang = be;
+            break;
+          case "ta":
+            selectLang = ta;
+            break;
+
+        }
+        $('#nav_home').html(selectLang.menu.home);
+        $('#nav_challenge').html(selectLang.menu.video_challenge);
+        $('#nav_library').html(selectLang.menu.video_library);
+        $('#nav_faq').html(selectLang.menu.faq);
+        $('#nav_login').html(selectLang.menu.login);
+      }
+      function libData(lang) {
+        firebase.firestore().collection("videolibrary").where("lang","==",lang).get().then(function (querySnapshot) {
+          $('.firebaseData').html('');
+          if (querySnapshot.docs.length == 0) {
           $('.w-dyn-empty').show();
+        }else{
+          $('.w-dyn-empty').hide();
         }
         querySnapshot.forEach(snapItem => {
           if (snapItem.exists) {
@@ -90,10 +220,8 @@
           }
         });	  
 	  })
-      });
-	 function goToShareApp(id){
-	 window.location.href = `https://psanodeapp1.appspot.com/videolibrary/${id}`;
-		}
+      }
+    
   </script>
 </body>
 </html>
