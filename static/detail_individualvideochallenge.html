@@ -120,7 +120,12 @@
       }
     }
 
+ if (localStorage.getItem("language")) {
+        updateContent(localStorage.getItem("language"));
+      } else {
+        updateContent('en');
 
+      }
   })
   function goToRecorderApp(psaId) {
     window.location.href = `${window.location.origin}/recorder/index.html#/recorder/?id=${psaId}`
@@ -138,12 +143,90 @@
         $('.w-dyn-empty').show();
       } else {
         const item = querySnapshot.data();
-        // item.release_date.toDate().toLocaleDateString() 
-        $('.firebaseData').append('<div class="column-8 w-col w-col-6"><div class="text-block-21">' + item.title + '</div><img src="' + item.image_url + '" alt=""><h3 class="heading-18">' + item.heading + '</h3><div class="text-block-17">' + item.created_by + '</div><div class="text-block-18">' + item.share + '</div><div class="text-block-16">Date released: ' + "19-04-2020" + '</div><div class="text-block-19">' + item.duration + '</div><p class="paragraph-8">' + item.description + '</p></div>');
+       
+        $('.firebaseData').append('<div class="column-8 w-col w-col-6"><div class="text-block-21">' + item.title + '</div><img src="' + item.image_url + '" alt=""><h3 class="heading-18">' + item.heading + '</h3><div class="text-block-17">' + item.created_by + '</div><div class="text-block-18">' + item.share + '</div><div class="text-block-16">Date released: ' + item.release_date.toDate().toLocaleDateString()  + '</div><div class="text-block-19">' + item.duration + '</div><p class="paragraph-8">' + item.description + '</p></div>');
         //  <div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=' + item.video_url + '" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div>
       }
     });
   }
+
+      function updateContent(lang) {
+      var en = {
+        "menu": {
+          "home": "HOME",
+          "video_challenge": "VIDEO CHALLENGES",
+          "video_library": "VIDEO LIBRARY",
+          "faq": "FAQS",
+          "login": "LOGIN"
+        }
+      }
+
+      var hi = {
+        "menu": {
+          "home": "घर",
+          "video_challenge": "वीडियो चुनौती",
+          "video_library": "वीडियो पुस्तकालय",
+          "faq": "सामान्य प्रश्नोत्तर",
+          "login": "लॉग इन करें"
+        }
+
+      }
+
+      var ma = {
+        "menu": {
+          "home": "सुरुवात",
+          "video_challenge": " व्हिडियो आव्हान",
+          "video_library": "सगळे व्हिडिओस",
+          "faq": "प्रश्नांचे उत्तर",
+          "login": "लॉगिन"
+        }
+      }
+
+
+      var be = {
+        "menu": {
+          "home": "হোমপেজে যান",
+          "video_challenge": "ভিডিও চ্যালেঞ্জগুলো",
+          "video_library": "ভিডিও সংকলন",
+          "faq": "কিছু সাধারন প্রশ্নের উত্তর",
+          "login": "লগ-ইন"
+        }
+      }
+
+      var ta = {
+        "menu": {
+         "home": "முகப்பு",
+		"video_challenge": "வீடியோ சவால்கள்",
+		"video_library": "வீடியோ லைப்ரரி",
+		"faq": "அடிக்கடி கேட்கப்படும் கேள்விகள்",
+		"login": "உள்நுழை"
+        }
+      }
+      selectLang = en;
+      switch (lang) {
+        case "en":
+          selectLang = en;
+          break;
+        case "hi":
+          selectLang = hi;
+          break;
+        case "ma":
+          selectLang = ma;
+          break;
+        case "be":
+          selectLang = be;
+          break;
+        case "ta":
+          selectLang = ta;
+          break;
+
+      }
+      $('#nav_home').html(selectLang.menu.home);
+      $('#nav_challenge').html(selectLang.menu.video_challenge);
+      $('#nav_library').html(selectLang.menu.video_library);
+      $('#nav_faq').html(selectLang.menu.faq);
+      $('#nav_login').html(selectLang.menu.login);
+    }
 </script>
 
 

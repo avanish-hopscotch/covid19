@@ -5235,7 +5235,8 @@ p {
     text-align: center;
   }
   .column-5 {
-    height: 180px;
+    height: auto;
+	margin-bottom:10px;
     text-align: center;
   }
   .text-block-8 {
@@ -5441,7 +5442,7 @@ p {
     font-weight: 600;
   }
   .column-14 {
-    height: 350px;
+    height: auto !important;
     margin-top: 53px;
     margin-bottom: 26px;
   }
