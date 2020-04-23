@@ -31,7 +31,7 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
-<body>
+<body class="body">
   <div class="wrapper-pages">
     <div data-collapse="medium" data-animation="default" data-duration="400" class="sticky-navbar w-nav">
       <div class="w-container">
@@ -64,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div class="text-block-10">VIDEO LIBRARY </div>
+  <div class="text-block-10" id="page_title">VIDEO LIBRARY </div>
   <div class="w-dyn-list">
   <div class="collection-list-2 w-dyn-items w-row">
       <div class="w-dyn-items w-row firebaseData">
@@ -200,6 +200,8 @@
         $('#nav_home').html(selectLang.menu.home);
         $('#nav_challenge').html(selectLang.menu.video_challenge);
         $('#nav_library').html(selectLang.menu.video_library);
+		  $('#page_title').html(selectLang.menu.video_library);
+	
         $('#nav_faq').html(selectLang.menu.faq);
         $('#nav_login').html(selectLang.menu.login);
       }

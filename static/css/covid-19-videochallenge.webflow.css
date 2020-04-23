@@ -1859,17 +1859,22 @@ p {
   margin-right: 20px;
   margin-left: 20px;
 }
-
+@media only screen and (max-width: 600px){
+  .wrapper-pages {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+}
 .hero-section {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 100vh;
-  margin-top: 11px;
-  margin-bottom: -252px;
+  /*height: auto;*/
+  margin-top: 98px;
+ /* margin-bottom: -252px;*/
   padding-top: 0%;
-  padding-bottom: 52px;
+  /*padding-bottom: 52px;*/
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -2033,8 +2038,8 @@ p {
 
 .section.collections {
   position: relative;
-  margin-top: 70px;
-  padding: 40px 0px;
+ /* margin-top: 0px;*/
+  padding: 30px 0px;
   border-top-style: none;
   background-color: #f8f6f4;
   font-family: Montserrat, sans-serif;
@@ -2128,9 +2133,10 @@ p {
   -ms-flex-pack: end;
   justify-content: flex-end;
   -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
+  -webkit-align-items: flex-start;
   -ms-flex-align: baseline;
-  align-items: baseline;
+  align-items: flex-start;
+  padding: 0px 40px;
 }
 
 .section-content-tittle {
@@ -2239,7 +2245,7 @@ p {
   display: block;
   width: 1200px;
   max-width: 100%;
-  margin-top: -35px;
+  margin-top: 0px;
   margin-right: auto;
   margin-left: auto;
   padding-top: 10px;
@@ -4475,10 +4481,11 @@ p {
 @media screen and (max-width: 991px) {
   .hero-section {
     display: block;
-    height: auto;
+    /*height: auto;*/
     padding-top: 60px;
     padding-right: 20px;
     padding-left: 20px;
+    margin-top: 0px;
     background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.3)), to(hsla(0, 0%, 100%, 0.3))), url('../images/scott-webb-268893-unsplash.jpg');
     background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0.3)), url('../images/scott-webb-268893-unsplash.jpg');
     background-position: 0px 0px, 0px 0px;
@@ -4550,17 +4557,34 @@ p {
     display: flex;
     overflow: visible;
     width: 100%;
-    padding: 0px;
+    padding: 0px 0px 0px 10px;
     -webkit-box-pack: center;
-    -webkit-justify-content: center;
+    -webkit-justify-content: flex-end;
     -ms-flex-pack: center;
-    justify-content: center;
+    justify-content: flex-end;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
     background-color: #fff;
   }
+  .nav-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  margin-bottom: 40px;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: baseline;
+  -webkit-align-items: center;
+  -ms-flex-align: baseline;
+  align-items: center;
+  padding: 0px 0px;
+}
   .vertical-category {
     left: -60px;
     top: 30%;
@@ -4609,8 +4633,8 @@ p {
     text-align: center;
   }
   .paragraph.main {
-    width: 45%;
-    text-align: center;
+    width: 100%;
+    text-align: left;
   }
   .tab-block {
     width: 200px;
@@ -4672,6 +4696,8 @@ p {
     right: 0px;
     display: block;
     padding: 0px;
+    box-shadow: none;
+    border-bottom: none
   }
   .container-3 {
     position: relative;
@@ -4819,7 +4845,7 @@ p {
     line-height: 48px;
   }
   .paragraph.main {
-    width: 45%;
+    width: 100%;
   }
   .tab-block {
     margin-bottom: 30px;
@@ -4937,7 +4963,7 @@ p {
 @media screen and (max-width: 479px) {
   .hero-section {
     height: auto;
-    padding: 0px 0px 30px;
+    padding: 0px 0px 0px;
     background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.3)), to(hsla(0, 0%, 100%, 0.3)));
     background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0.3));
     line-height: 10px;
@@ -4984,7 +5010,12 @@ p {
     padding-left: 10px;
   }
   .nav-flex {
-    height: 80px;
+    height: 60px;
+    align-items: center;
+  }
+  .body{
+    margin-right: 0px;
+    margin-left: 0px;
   }
   .section-content-tittle {
     margin-top: 30px;
@@ -5287,7 +5318,7 @@ p {
     font-size: 18px;
   }
   .heading-16 {
-    margin-top: 100px;
+    /*margin-top: 100px;*/
     padding-top: 10px;
     color: #314dbd;
     font-size: 18px;
@@ -5395,7 +5426,7 @@ p {
     font-weight: 300;
   }
   .section-3 {
-    background-color: #aec0ee;
+    background-color: #ffffff;
   }
   .text-block-21 {
     padding-bottom: 10px;
@@ -5443,8 +5474,8 @@ p {
   }
   .column-14 {
     height: auto !important;
-    margin-top: 53px;
-    margin-bottom: 26px;
+    margin-top: 25px;
+    margin-bottom: 15px;
   }
   .bold-text-12 {
     color: #000;
@@ -5472,9 +5503,11 @@ p {
   }
   .columns-8 {
     background-color: #fff;
+    margin-top: 0;
   }
   .column-22 {
     padding-top: 0px;
   }
 }
+.pb-20{padding-bottom: 20px;}
 
