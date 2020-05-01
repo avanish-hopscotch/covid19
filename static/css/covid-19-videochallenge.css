@@ -4879,6 +4879,60 @@ p {
   background-color: rgba(1, 1, 1, 0.1);
 }
 
+.telepromter-text {
+  margin-bottom: 0px;
+  font-family: Roboto, sans-serif;
+  color: #f8f8f8;
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+}
+
+.teleprompter-bg {
+  position: relative;
+  z-index: 5;
+  margin-right: 24px;
+  margin-left: 24px;
+  padding: 13px;
+  border-radius: 8px;
+  background-color: hsla(0, 0%, 67.5%, 0.6);
+}
+
+.recorder-wrap {
+  position: relative;
+  display: block;
+  width: 71px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.record-bg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: #f33;
+}
+
+.rec-text {
+  padding: 4px 8px;
+  font-family: Roboto, sans-serif;
+  color: #f1f1f1;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .share-container--record {
   padding: 64px 36px 128px;
   background-color: #fbfbfb;
@@ -5054,6 +5108,12 @@ p {
   height: 40px;
 }
 
+.share-btn-bg--desktop.no-padding {
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
 .share-btn--desktop {
   display: -webkit-box;
   display: -webkit-flex;
@@ -5069,6 +5129,14 @@ p {
   color: #010101;
   font-size: 16px;
   font-weight: 400;
+}
+
+.body-text.share {
+  margin-left: 24px;
+}
+
+.body-text.share-nav {
+  margin-left: 12px;
 }
 
 .share-btn-icon--desktop {
@@ -5111,7 +5179,7 @@ p {
 .share-nav-border--desktop {
   width: 100%;
   height: 1px;
-  margin: 24px auto 12px;
+  margin: 12px auto;
   padding: 0px 24px;
   background-color: rgba(1, 1, 1, 0.1);
 }
@@ -5127,6 +5195,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  min-height: 120px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -5135,6 +5204,16 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  border-right: 3px solid #dbdbdb;
+  border-bottom: 3px solid #dbdbdb;
+  border-left: 3px solid rgba(1, 1, 1, 0.1);
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.play.hidden {
+  display: none;
 }
 
 .video-bg {
@@ -5152,7 +5231,6 @@ p {
   width: 100%;
   height: 80%;
   border-radius: 8px 8px 0px 0px;
-  background-color: #010101;
 }
 
 .record-section--desktop {
@@ -5162,8 +5240,10 @@ p {
 }
 
 .record-video-layout {
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   height: 100vh;
   margin-top: -75px;
@@ -5171,28 +5251,33 @@ p {
   padding-right: 0px;
   padding-bottom: 0px;
   grid-auto-columns: 1fr;
-  grid-column-gap: 46px;
-  grid-row-gap: 46px;
+  grid-column-gap: 0px;
+  grid-row-gap: 24px;
   -ms-grid-columns: 1fr 3fr;
   grid-template-columns: 1fr 3fr;
   -ms-grid-rows: auto;
   grid-template-rows: auto;
-  background-image: url('../images/login.svg');
-  background-position: 0px 0px;
-  background-size: cover;
+  background-color: rgba(1, 1, 1, 0.03);
 }
 
 .side-nav {
-  margin-bottom: -100px;
+  position: fixed;
+  width: 240px;
+  max-width: 320px;
+  border-right: 3px solid rgba(1, 1, 1, 0.1);
   border-radius: 4px;
   background-color: #fff;
 }
 
 .record-ui {
-  margin: 24px;
+  width: 100%;
+  margin: 48px;
 }
 
 .side-nav-content {
+  position: -webkit-sticky;
+  position: sticky;
+  margin-top: 12px;
   padding: 24px;
 }
 
@@ -5217,7 +5302,7 @@ p {
 
 .record-navigation {
   position: relative;
-  height: 120px;
+  height: 100px;
   background-color: #fbfbfb;
 }
 
@@ -5231,6 +5316,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 8px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -5244,6 +5330,11 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.transcribe--desktop {
+  width: 28px;
+  height: 28px;
 }
 
 .color-elipse {
@@ -5294,6 +5385,14 @@ p {
   background-color: rgba(1, 1, 1, 0.1);
 }
 
+.color-elipse.blue {
+  background-color: #05a4fb;
+}
+
+.color-elipse.orange {
+  background-color: #f17020;
+}
+
 .btn_logo--desktop {
   width: 60px;
   height: 100%;
@@ -5305,8 +5404,11 @@ p {
   top: 0%;
   right: 0%;
   bottom: 0%;
+  display: block;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  border: 3px solid #dbdbdb;
+  border-radius: 8px 8px 0px 0px;
   background-color: rgba(1, 1, 1, 0.4);
 }
 
@@ -5376,6 +5478,147 @@ p {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #dbdbdb;
+  border-radius: 4px;
+  background-image: url('../images/woman-holding-bicycle-on-asphalt-road-1289107-2.jpg');
+  background-position: 50% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.side-nav-wrapper--desktop {
+  margin-top: 24px;
+}
+
+.h3 {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  font-family: Montserrat, sans-serif;
+  color: #010101;
+  font-size: 24px;
+  line-height: 120%;
+  font-weight: 600;
+}
+
+.recorder-wrap--desktop {
+  position: absolute;
+  left: auto;
+  top: 0%;
+  right: 0%;
+  bottom: auto;
+  display: block;
+  width: 71px;
+  margin-top: 24px;
+  margin-right: 24px;
+  margin-left: auto;
+}
+
+.challange-title {
+  position: relative;
+  z-index: 1001;
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 28px;
+  padding-left: 24px;
+  font-family: Montserrat, sans-serif;
+  color: #f8f8f8;
+  font-size: 16px;
+  line-height: 120%;
+  font-weight: 600;
+}
+
+.side-nav-bg {
+  position: relative;
+  width: 320px;
+  max-width: 320px;
+  border-right: 3px solid rgba(1, 1, 1, 0.1);
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.static-color-elipse {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 45px;
+  height: 45px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: green;
+}
+
+.static-color-elipse.green {
+  background-color: #00ca72;
+}
+
+.static-color-elipse.facebook {
+  background-color: #3b5998;
+}
+
+.static-color-elipse.linkedin {
+  background-color: #0072b1;
+}
+
+.static-color-elipse.twitter {
+  background-color: #1da1f2;
+}
+
+.static-color-elipse.mail {
+  background-color: #010101;
+}
+
+.static-color-elipse.instagram {
+  background-color: #e1306c;
+}
+
+.static-color-elipse.grey {
+  margin-bottom: 8px;
+  background-color: rgba(1, 1, 1, 0.1);
+}
+
+.static-color-elipse.blue {
+  background-color: #05a4fb;
+}
+
+.static-color-elipse.orange {
+  background-color: #f17020;
+}
+
+.label-text {
+  font-family: Roboto, sans-serif;
+  color: #010101;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.label-text.share {
+  margin-left: 24px;
+}
+
+.label-text.share-nav {
+  margin-left: 12px;
+}
+
+.record-video-text-block--desktop {
+  max-width: 600px;
+  margin-top: 46px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 991px) {
@@ -5668,6 +5911,9 @@ p {
   }
   .login-section {
     margin-top: 0px;
+  }
+  .record-video-layout {
+    padding-top: 0px;
   }
 }
 
@@ -7008,6 +7254,7 @@ p {
     margin-bottom: 0px;
     font-family: Roboto, sans-serif;
     color: #f8f8f8;
+    font-size: 14px;
     line-height: 140%;
   }
   .teleprompter-bg {
@@ -7016,7 +7263,7 @@ p {
     margin-right: 24px;
     margin-left: 24px;
     padding: 13px;
-    border-radius: 20px;
+    border-radius: 8px;
     background-color: hsla(0, 0%, 67.3%, 0.6);
   }
   .recorder-wrap {
@@ -7088,6 +7335,7 @@ p {
   }
   .share-section--record {
     position: relative;
+    display: block;
     max-height: 85vh;
     margin-top: 0px;
   }
@@ -7370,6 +7618,29 @@ p {
     -ms-flex-item-align: center;
     -ms-grid-row-align: center;
     align-self: center;
+  }
+  .side-nav-wrapper--desktop {
+    padding: 24px 12px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #f8f8f8;
+  }
+  .recorder-wrap--desktop {
+    display: inline-block;
+    width: 71px;
+    margin-right: auto;
+    margin-left: auto;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .record-video-text-block--desktop {
+    margin-bottom: 24px;
   }
 }
 
