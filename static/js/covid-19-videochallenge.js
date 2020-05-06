@@ -197,6 +197,23 @@ module.exports = isArray;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var path = __webpack_require__(104);
+var has = __webpack_require__(14);
+var wrappedWellKnownSymbolModule = __webpack_require__(248);
+var defineProperty = __webpack_require__(15).f;
+
+module.exports = function (NAME) {
+  var Symbol = path.Symbol || (path.Symbol = {});
+  if (!has(Symbol, NAME)) defineProperty(Symbol, NAME, {
+    value: wrappedWellKnownSymbolModule.f(NAME)
+  });
+};
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 function _extends() {
@@ -218,23 +235,6 @@ function _extends() {
 }
 
 module.exports = _extends;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var path = __webpack_require__(104);
-var has = __webpack_require__(14);
-var wrappedWellKnownSymbolModule = __webpack_require__(248);
-var defineProperty = __webpack_require__(15).f;
-
-module.exports = function (NAME) {
-  var Symbol = path.Symbol || (path.Symbol = {});
-  if (!has(Symbol, NAME)) defineProperty(Symbol, NAME, {
-    value: wrappedWellKnownSymbolModule.f(NAME)
-  });
-};
-
 
 /***/ }),
 /* 5 */
@@ -611,12 +611,13 @@ var _exportNames = {
   DEFAULT_PRICE_TEMPLATE_VALUE: true,
   CSV_CURRENCY_TEMPLATE: true,
   CSV_INTEGRATION_CURRENCY_TEMPLATE: true,
+  DOWNLOAD_FILES_FAKE_DATA: true,
   DOWNLOAD_FILES_KEY_PATH: true,
   DOWNLOAD_FILES_EDITABLE_FIELDS: true
 };
-exports.DOWNLOAD_FILES_EDITABLE_FIELDS = exports.DOWNLOAD_FILES_KEY_PATH = exports.CSV_INTEGRATION_CURRENCY_TEMPLATE = exports.CSV_CURRENCY_TEMPLATE = exports.DEFAULT_PRICE_TEMPLATE_VALUE = exports.PRICE_TEMPLATE_OPTIONS = exports.PRICE_TEMPLATE_CURRENCY_CODE = exports.PRICE_TEMPLATE_AMOUNT = exports.PRICE_TEMPLATE_CURRENCY_SYMBOL = exports.MAX_PRODUCT_DIMENSION = exports.MAX_TOTAL_ORDER_PRICE = exports.INFINITE_INVENTORY = exports.INVENTORY_TYPE_INFINITE = exports.INVENTORY_TYPE_FINITE = exports.SHIPPING_METHODS = void 0;
+exports.DOWNLOAD_FILES_EDITABLE_FIELDS = exports.DOWNLOAD_FILES_KEY_PATH = exports.DOWNLOAD_FILES_FAKE_DATA = exports.CSV_INTEGRATION_CURRENCY_TEMPLATE = exports.CSV_CURRENCY_TEMPLATE = exports.DEFAULT_PRICE_TEMPLATE_VALUE = exports.PRICE_TEMPLATE_OPTIONS = exports.PRICE_TEMPLATE_CURRENCY_CODE = exports.PRICE_TEMPLATE_AMOUNT = exports.PRICE_TEMPLATE_CURRENCY_SYMBOL = exports.MAX_PRODUCT_DIMENSION = exports.MAX_TOTAL_ORDER_PRICE = exports.INFINITE_INVENTORY = exports.INVENTORY_TYPE_INFINITE = exports.INVENTORY_TYPE_FINITE = exports.SHIPPING_METHODS = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _camelCase = _interopRequireDefault(__webpack_require__(590));
 
@@ -739,6 +740,16 @@ var CSV_CURRENCY_TEMPLATE = [_intoToken(PRICE_TEMPLATE_CURRENCY_SYMBOL), _intoTo
 exports.CSV_CURRENCY_TEMPLATE = CSV_CURRENCY_TEMPLATE;
 var CSV_INTEGRATION_CURRENCY_TEMPLATE = [_intoToken(PRICE_TEMPLATE_AMOUNT), ' ', _intoToken(PRICE_TEMPLATE_CURRENCY_CODE)].join('');
 exports.CSV_INTEGRATION_CURRENCY_TEMPLATE = CSV_INTEGRATION_CURRENCY_TEMPLATE;
+var DOWNLOAD_FILES_FAKE_DATA = [{
+  id: '5d8fcb6d94dd1853060fb3b3',
+  name: 'The modern web design process - Webflow Ebook.pdf',
+  url: 'https://assets-global.website-files.com/5cf6b7202bf8199f50d43e6c/5e9dd8a680b972888929747b_The%20modern%20web%20design%20process%20-%20Webflow%20Ebook.pdf'
+}, {
+  id: '5d8fcb6d94dd1853060fb3b4',
+  name: 'The freelance web designers guide - Webflow Ebook.pdf',
+  url: 'https://assets-global.website-files.com/5cf6b7202bf8199f50d43e6c/5e9dd8e6abe52b33243a22cf_The%20freelance%20web%20designer%E2%80%99s%20guide%20-%20Webflow%20Ebook.pdf'
+}];
+exports.DOWNLOAD_FILES_FAKE_DATA = DOWNLOAD_FILES_FAKE_DATA;
 var DOWNLOAD_FILES_KEY_PATH = 'download-files';
 exports.DOWNLOAD_FILES_KEY_PATH = DOWNLOAD_FILES_KEY_PATH;
 var DOWNLOAD_FILES_EDITABLE_FIELDS = {
@@ -2750,7 +2761,7 @@ exports["default"] = void 0;
 
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(7));
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _stripeStore = __webpack_require__(77);
 
@@ -11080,7 +11091,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderTree = exports.applySkuBoundConditionalVisibility = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _ConditionUtils = __webpack_require__(633);
 
@@ -11710,7 +11721,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.applyDiscount = exports.trackOrderAndRedirect = exports.orderRequiresAdditionalAction = exports.getOrderDataFromGraphQLResponse = exports.createAttemptSubmitOrderRequest = exports.renderCheckoutFormContainers = exports.createUpdateObfuscatedOrderAddressMutation = exports.createRecalcOrderEstimationsMutation = exports.createStripePaymentMethodMutation = exports.createCustomDataMutation = exports.createOrderShippingMethodMutation = exports.createOrderAddressMutation = exports.createOrderIdentityMutation = exports.beforeUnloadHandler = exports.showErrorMessageForError = exports.updateErrorMessage = exports.initializeStripeElements = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _apolloClient = _interopRequireDefault(__webpack_require__(254));
 
@@ -13404,7 +13415,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.mediaQueriesDefined = exports.viewportWidthChanged = exports.actionListPlaybackChanged = exports.elementStateChanged = exports.instanceRemoved = exports.instanceStarted = exports.instanceAdded = exports.parameterChanged = exports.animationFrameChanged = exports.eventStateChanged = exports.testFrameRendered = exports.eventListenerAdded = exports.clearRequested = exports.stopRequested = exports.playbackRequested = exports.previewRequested = exports.sessionStopped = exports.sessionStarted = exports.sessionInitialized = exports.rawDataImported = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _constants = __webpack_require__(65);
 
@@ -25906,7 +25917,7 @@ Object.defineProperty(exports, "EventContinuousMouseAxes", {
 });
 exports.EventConsts = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _types = __webpack_require__(91);
 
@@ -26289,7 +26300,7 @@ exports.stopAllActionGroups = stopAllActionGroups;
 exports.stopActionGroup = stopActionGroup;
 exports.startActionGroup = startActionGroup;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(226));
 
@@ -30651,7 +30662,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(7));
 
@@ -31446,7 +31457,11 @@ var HARD_CODED_FIELDS_PER_COLLECTION_TYPE = (_HARD_CODED_FIELDS_PE = {}, (0, _de
   slug: 'quantity',
   type: 'Number'
 }), (0, _Field["default"])({
-  helpText: 'Options allow you to sell different variants of the same product, like clothes of different colors and sizes. Each unique combination of options results in a variation listed in the Inventory table below.',
+  id: 'attach-files',
+  name: 'Attach files',
+  slug: 'attach-files',
+  type: 'Bool'
+}), (0, _Field["default"])({
   id: 'options',
   name: 'Options',
   slug: 'options',
@@ -31527,7 +31542,7 @@ exports.convertWFPriceToPaypalAmount = convertWFPriceToPaypalAmount;
 exports.convertPaypalAmountToWFPrice = convertPaypalAmountToWFPrice;
 exports.intToUnsafeFloat = exports.unsafeFloatToInt = exports.getCurrencySymbol = exports.currencyInfoByCodePaypal = exports.currencyInfoByCode = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _keyBy = _interopRequireDefault(__webpack_require__(609));
 
@@ -44501,13 +44516,11 @@ exports.clearPlugin = clearPlugin;
 "use strict";
 
 
-var _interopRequireDefault2 = __webpack_require__(0);
+var _interopRequireDefault = __webpack_require__(0);
 
-var _defineProperty2 = _interopRequireDefault2(__webpack_require__(7));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(7));
 
 var _InteractionConsts, _InteractionToEventsM;
-
-var _interopRequireDefault = __webpack_require__(0);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -44518,9 +44531,7 @@ Object.defineProperty(exports, "InteractionTypeConsts", {
     return _types.InteractionTypeConsts;
   }
 });
-exports.InteractionToEventsMap = exports.InteractionConsts = void 0;
-
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+exports.InteractionToEventsMap = exports.InteractionPages = exports.InteractionElements = exports.InteractionConsts = void 0;
 
 var _triggerEvents = __webpack_require__(218);
 
@@ -44541,52 +44552,67 @@ var _types$InteractionTyp = _types.InteractionTypeConsts,
     ECOMMERCE_CART_INTERACTION = _types$InteractionTyp.ECOMMERCE_CART_INTERACTION,
     TAB_INTERACTION = _types$InteractionTyp.TAB_INTERACTION,
     SLIDER_INTERACTION = _types$InteractionTyp.SLIDER_INTERACTION;
-var defaultInteractionConsts = {
-  id: null,
-  label: '',
-  continuous: false,
-  description: '',
-  note: '',
-  headings: [],
-  isPage: false
+
+var createInteractionConst = function createInteractionConst(_ref) {
+  var id = _ref.id,
+      label = _ref.label,
+      _ref$continuous = _ref.continuous,
+      continuous = _ref$continuous === void 0 ? false : _ref$continuous,
+      description = _ref.description,
+      note = _ref.note,
+      headings = _ref.headings,
+      _ref$isPage = _ref.isPage,
+      isPage = _ref$isPage === void 0 ? false : _ref$isPage,
+      componentType = _ref.componentType;
+  return {
+    id: id,
+    label: label,
+    continuous: continuous,
+    description: description,
+    note: note,
+    headings: headings,
+    isPage: isPage,
+    componentType: componentType
+  };
 };
 /**
  * General UI  + Logic
  */
 
-var InteractionConsts = (_InteractionConsts = {}, (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_CLICK_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+
+var InteractionConsts = (_InteractionConsts = {}, (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_CLICK_INTERACTION, createInteractionConst({
   id: MOUSE_CLICK_INTERACTION,
   label: 'Mouse click (tap)',
   headings: ['On 1st click', 'On 2nd click'],
   note: 'Define actions that occur on 1st or 2nd tap.',
   description: 'Animate on 1st or 2nd click/tap.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_HOVER_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_HOVER_INTERACTION, createInteractionConst({
   id: MOUSE_HOVER_INTERACTION,
   label: 'Mouse hover',
   headings: ['On hover', 'On hover out'],
   note: 'Define actions that occur when cursor hovers over or away from element.',
   description: 'Animate when cursor hovers over or away from element. No touch support.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_MOVE_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_MOVE_INTERACTION, createInteractionConst({
   id: MOUSE_MOVE_INTERACTION,
   label: 'Mouse move over element',
   continuous: true,
   headings: ['On mouse move'],
   note: 'Define actions that occur when cursor moves over element along X or Y axis.',
   description: 'Animate while cursor moves over the element along the X or Y axis. No touch support.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, SCROLL_INTO_VIEW_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, SCROLL_INTO_VIEW_INTERACTION, createInteractionConst({
   id: SCROLL_INTO_VIEW_INTERACTION,
   label: 'Scroll into view',
   headings: ['When scrolled into view', 'When scrolled out of view'],
   note: 'Define actions that occur when element scrolls into view.',
   description: 'Animate when element scrolls into view.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, SCROLLING_IN_VIEW_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, SCROLLING_IN_VIEW_INTERACTION, createInteractionConst({
   id: SCROLLING_IN_VIEW_INTERACTION,
   label: 'While scrolling in view',
   continuous: true,
   headings: ['On scroll'],
   note: 'Define actions that occur when element scrolls through viewport.',
   description: 'Animate while element scrolls through viewport.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_MOVE_IN_VIEWPORT_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, MOUSE_MOVE_IN_VIEWPORT_INTERACTION, createInteractionConst({
   id: MOUSE_MOVE_IN_VIEWPORT_INTERACTION,
   label: 'Mouse move in viewport',
   continuous: true,
@@ -44594,7 +44620,7 @@ var InteractionConsts = (_InteractionConsts = {}, (0, _defineProperty2["default"
   note: 'Define actions that occur while the mouse moves over the viewport along the X or Y axis. No touch support.',
   description: 'Animate while the mouse moves over the viewport along the X or Y axis. No touch support.',
   isPage: true
-})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_IS_SCROLLING_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_IS_SCROLLING_INTERACTION, createInteractionConst({
   id: PAGE_IS_SCROLLING_INTERACTION,
   label: 'While page is scrolling',
   continuous: true,
@@ -44602,52 +44628,77 @@ var InteractionConsts = (_InteractionConsts = {}, (0, _defineProperty2["default"
   note: 'Define actions that occur during page scroll.',
   description: 'Animate elements as entire page scrolls from top to bottom.',
   isPage: true
-})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_LOAD_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_LOAD_INTERACTION, createInteractionConst({
   id: PAGE_LOAD_INTERACTION,
   label: 'Page load',
   headings: ['When page starts loading', 'When page finishes loading'],
   note: 'Define actions that occur when page starts or finishes loading.',
   description: 'Animate when the page starts or finishes loading.',
   isPage: true
-})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_SCROLLED_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, PAGE_SCROLLED_INTERACTION, createInteractionConst({
   id: PAGE_SCROLLED_INTERACTION,
   label: 'Page scrolled',
   headings: ['When scrolled up', 'When scrolled down'],
   note: 'Define actions that occur when the page scrolls up or down.',
   description: 'Animate when page scrolls up and/or down.',
   isPage: true
-})), (0, _defineProperty2["default"])(_InteractionConsts, NAVBAR_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+})), (0, _defineProperty2["default"])(_InteractionConsts, NAVBAR_INTERACTION, createInteractionConst({
   id: NAVBAR_INTERACTION,
   label: 'Navbar opens',
   headings: ['Menu opens', 'Menu closes'],
   note: 'Select actions to perform when navbar menu opens and closes.',
-  description: 'Animate when navbar menu opens or closes.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, DROPDOWN_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+  description: 'Animate when navbar menu opens or closes.',
+  componentType: 'navbar'
+})), (0, _defineProperty2["default"])(_InteractionConsts, DROPDOWN_INTERACTION, createInteractionConst({
   id: DROPDOWN_INTERACTION,
   label: 'Dropdown opens',
   headings: ['Menu opens', 'Menu closes'],
   note: 'Define actions to perform when dropdown menu opens and closes.',
-  description: 'Animate when dropdown menu opens or closes.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, ECOMMERCE_CART_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+  description: 'Animate when dropdown menu opens or closes.',
+  componentType: 'dropdown'
+})), (0, _defineProperty2["default"])(_InteractionConsts, ECOMMERCE_CART_INTERACTION, createInteractionConst({
   id: ECOMMERCE_CART_INTERACTION,
   label: 'Cart opens',
   headings: ['Cart opens', 'Cart closes'],
   note: 'Select actions to perform when cart opens and closes.',
-  description: 'Animate when cart opens or closes.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, TAB_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+  description: 'Animate when cart opens or closes.',
+  componentType: 'ecommerce'
+})), (0, _defineProperty2["default"])(_InteractionConsts, TAB_INTERACTION, createInteractionConst({
   id: TAB_INTERACTION,
   label: 'Tab change',
   headings: ['Tab in view', 'Tab out of view'],
   note: 'Define actions to perform when a tab is in view (active) and out of view (inactive).',
-  description: 'Animate when tab is in view or out of view.'
-})), (0, _defineProperty2["default"])(_InteractionConsts, SLIDER_INTERACTION, (0, _extends2["default"])({}, defaultInteractionConsts, {
+  description: 'Animate when tab is in view or out of view.',
+  componentType: 'tab'
+})), (0, _defineProperty2["default"])(_InteractionConsts, SLIDER_INTERACTION, createInteractionConst({
   id: SLIDER_INTERACTION,
   label: 'Slider change',
   headings: ['Slider in view', 'Slider out of view'],
   note: 'Define actions to perform when slide comes into view and goes out of view.',
-  description: 'Animate when slide is in view or out of view.'
+  description: 'Animate when slide is in view or out of view.',
+  componentType: 'slider'
 })), _InteractionConsts);
 exports.InteractionConsts = InteractionConsts;
+
+var _Object$keys$reduce = Object.keys(InteractionConsts).reduce(function (result, key) {
+  var value = InteractionConsts[key];
+
+  if (value.isPage) {
+    result.InteractionPages.push(value);
+  } else {
+    result.InteractionElements.push(value);
+  }
+
+  return result;
+}, {
+  InteractionElements: [],
+  InteractionPages: []
+}),
+    InteractionElements = _Object$keys$reduce.InteractionElements,
+    InteractionPages = _Object$keys$reduce.InteractionPages;
+
+exports.InteractionPages = InteractionPages;
+exports.InteractionElements = InteractionElements;
 var InteractionToEventsMap = (_InteractionToEventsM = {}, (0, _defineProperty2["default"])(_InteractionToEventsM, MOUSE_CLICK_INTERACTION, [_triggerEvents.EventConsts.MOUSE_CLICK, _triggerEvents.EventConsts.MOUSE_SECOND_CLICK]), (0, _defineProperty2["default"])(_InteractionToEventsM, MOUSE_HOVER_INTERACTION, [_triggerEvents.EventConsts.MOUSE_OVER, _triggerEvents.EventConsts.MOUSE_OUT]), (0, _defineProperty2["default"])(_InteractionToEventsM, SCROLL_INTO_VIEW_INTERACTION, [_triggerEvents.EventConsts.SCROLL_INTO_VIEW, _triggerEvents.EventConsts.SCROLL_OUT_OF_VIEW]), (0, _defineProperty2["default"])(_InteractionToEventsM, PAGE_LOAD_INTERACTION, [_triggerEvents.EventConsts.PAGE_START, _triggerEvents.EventConsts.PAGE_FINISH]), (0, _defineProperty2["default"])(_InteractionToEventsM, PAGE_SCROLLED_INTERACTION, [_triggerEvents.EventConsts.PAGE_SCROLL_UP, _triggerEvents.EventConsts.PAGE_SCROLL_DOWN]), (0, _defineProperty2["default"])(_InteractionToEventsM, MOUSE_MOVE_INTERACTION, [_triggerEvents.EventConsts.MOUSE_MOVE]), (0, _defineProperty2["default"])(_InteractionToEventsM, SCROLLING_IN_VIEW_INTERACTION, [_triggerEvents.EventConsts.SCROLLING_IN_VIEW]), (0, _defineProperty2["default"])(_InteractionToEventsM, MOUSE_MOVE_IN_VIEWPORT_INTERACTION, [_triggerEvents.EventConsts.MOUSE_MOVE_IN_VIEWPORT]), (0, _defineProperty2["default"])(_InteractionToEventsM, PAGE_IS_SCROLLING_INTERACTION, [_triggerEvents.EventConsts.PAGE_SCROLL]), (0, _defineProperty2["default"])(_InteractionToEventsM, DROPDOWN_INTERACTION, [_triggerEvents.EventConsts.DROPDOWN_OPEN, _triggerEvents.EventConsts.DROPDOWN_CLOSE]), (0, _defineProperty2["default"])(_InteractionToEventsM, NAVBAR_INTERACTION, [_triggerEvents.EventConsts.NAVBAR_OPEN, _triggerEvents.EventConsts.NAVBAR_CLOSE]), (0, _defineProperty2["default"])(_InteractionToEventsM, ECOMMERCE_CART_INTERACTION, [_triggerEvents.EventConsts.ECOMMERCE_CART_OPEN, _triggerEvents.EventConsts.ECOMMERCE_CART_CLOSE]), (0, _defineProperty2["default"])(_InteractionToEventsM, TAB_INTERACTION, [_triggerEvents.EventConsts.TAB_ACTIVE, _triggerEvents.EventConsts.TAB_INACTIVE]), (0, _defineProperty2["default"])(_InteractionToEventsM, SLIDER_INTERACTION, [_triggerEvents.EventConsts.SLIDER_ACTIVE, _triggerEvents.EventConsts.SLIDER_INACTIVE]), _InteractionToEventsM);
 exports.InteractionToEventsMap = InteractionToEventsMap;
 
@@ -46784,7 +46835,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ixRequest = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _shared = __webpack_require__(16);
 
@@ -48299,7 +48350,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _flow = _interopRequireDefault(__webpack_require__(438));
 
@@ -50464,7 +50515,7 @@ var hiddenKeys = __webpack_require__(103);
 var uid = __webpack_require__(147);
 var wellKnownSymbol = __webpack_require__(6);
 var wrappedWellKnownSymbolModule = __webpack_require__(248);
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 var setToStringTag = __webpack_require__(73);
 var InternalStateModule = __webpack_require__(101);
 var $forEach = __webpack_require__(31).forEach;
@@ -50797,7 +50848,7 @@ module.exports.f = function getOwnPropertyNames(it) {
 /* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.asyncIterator` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.asynciterator
@@ -50865,7 +50916,7 @@ if (DESCRIPTORS && typeof NativeSymbol == 'function' && (!('description' in Nati
 /* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.hasInstance` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.hasinstance
@@ -50876,7 +50927,7 @@ defineWellKnownSymbol('hasInstance');
 /* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.isConcatSpreadable` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.isconcatspreadable
@@ -50887,7 +50938,7 @@ defineWellKnownSymbol('isConcatSpreadable');
 /* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.iterator` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.iterator
@@ -50898,7 +50949,7 @@ defineWellKnownSymbol('iterator');
 /* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.match` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.match
@@ -50909,7 +50960,7 @@ defineWellKnownSymbol('match');
 /* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.matchAll` well-known symbol
 defineWellKnownSymbol('matchAll');
@@ -50919,7 +50970,7 @@ defineWellKnownSymbol('matchAll');
 /* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.replace` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.replace
@@ -50930,7 +50981,7 @@ defineWellKnownSymbol('replace');
 /* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.search` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.search
@@ -50941,7 +50992,7 @@ defineWellKnownSymbol('search');
 /* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.species` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.species
@@ -50952,7 +51003,7 @@ defineWellKnownSymbol('species');
 /* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.split` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.split
@@ -50963,7 +51014,7 @@ defineWellKnownSymbol('split');
 /* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.toPrimitive` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.toprimitive
@@ -50974,7 +51025,7 @@ defineWellKnownSymbol('toPrimitive');
 /* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.toStringTag` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.tostringtag
@@ -50985,7 +51036,7 @@ defineWellKnownSymbol('toStringTag');
 /* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.unscopables` well-known symbol
 // https://tc39.github.io/ecma262/#sec-symbol.unscopables
@@ -51019,7 +51070,7 @@ setToStringTag(global.JSON, 'JSON', true);
 /* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.patternMatch` well-known symbol
 // https://github.com/tc39/proposal-using-statement
@@ -51030,7 +51081,7 @@ defineWellKnownSymbol('dispose');
 /* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.observable` well-known symbol
 // https://github.com/tc39/proposal-observable
@@ -51041,7 +51092,7 @@ defineWellKnownSymbol('observable');
 /* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.patternMatch` well-known symbol
 // https://github.com/tc39/proposal-pattern-matching
@@ -51052,7 +51103,7 @@ defineWellKnownSymbol('patternMatch');
 /* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var defineWellKnownSymbol = __webpack_require__(4);
+var defineWellKnownSymbol = __webpack_require__(3);
 
 // `Symbol.replaceAll` well-known symbol
 // https://tc39.github.io/proposal-string-replaceall/
@@ -58384,7 +58435,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.register = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _graphqlTag = _interopRequireDefault(__webpack_require__(56));
 
@@ -61997,8 +62048,8 @@ module.exports = unicodeWords;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WF_TEMPLATE_ID_DATA_KEY = exports.WF_COLLECTION_DATA_KEY = exports.WF_CONDITION_DATA_KEY = exports.WF_BINDING_DATA_KEY = exports.DEFAULT_SKU_SLUG = exports.COMMERCE_PLUGIN_KEY = exports.COMMERCE_CATEGORY_COLLECTION_SLUG = exports.COMMERCE_PRODUCT_FIELD_SLUG = exports.COMMERCE_PRODUCT_COLLECTION_SLUG = exports.COMMERCE_SKU_FIELD_SLUG = exports.COMMERCE_SKU_COLLECTION_SLUG = exports.COMMERCE_CART_ITEM_ID_ATTR = exports.COMMERCE_CART_PUBLISHED_SITE_ACTIONS = exports.COMMERCE_CART_PUBLISHED_SITE_ACTION_ATTR = exports.CART_PRODUCT_ADDED_DEFAULT = exports.CART_PRODUCT_ADDED_KEYPATH = exports.CART_PRODUCT_ADDED_KEY = exports.CART_TYPE_DROPDOWN_ON_OPEN_KEY = exports.CART_TYPE_KEY = exports.CHECKOUT_PLACE_ORDER_LOADING_TEXT_DEFAULT = exports.CHECKOUT_PLACE_ORDER_BUTTON_TEXT_DEFAULT = exports.CART_CHECKOUT_LOADING_TEXT_DEFAULT = exports.CART_CHECKOUT_BUTTON_TEXT_DEFAULT = exports.LOADING_TEXT_DEFAULT = exports.LOADING_TEXT = exports.ADD_TO_CART_BUTTON_TEXT_DEFAULT = exports.HIDE_CART_COUNT_DEFAULT = exports.HIDE_CART_COUNT_KEYPATH = exports.HIDE_CART_COUNT_KEY = exports.HIDE_CART_WHEN_EMPTY_DEFAULT = exports.HIDE_CART_WHEN_EMPTY_KEYPATH = exports.HIDE_CART_WHEN_EMPTY_KEY = exports.BILLING_ADDRESS_TOGGLE_DEFAULT = exports.BILLING_ADDRESS_TOGGLE_KEYPATH = exports.BILLING_ADDRESS_TOGGLE_KEY = exports.OPEN_STATE_DEFAULT = exports.OPEN_STATE_KEYPATH = exports.OPEN_STATE_KEY = exports.SHIPPING_METHODS_STATE = exports.CHECKOUT_STATE = exports.QUICK_CHECKOUT_STATE_KEYPATH = exports.QUICK_CHECKOUT_STATE = exports.CART_STATE = exports.STATE = exports.QUANTITY_ENABLED_DEFAULT = exports.QUANTITY_ENABLED = exports.PREVIEW_ITEMS_KEYPATH = exports.PREVIEW_ITEMS_KEY = exports.PREVIEW_ITEMS_DEFAULT = exports.QUICK_CHECKOUT_AUTOMATION = exports.QUICK_CHECKOUT_STATES = exports.CART_COUNT_HIDE_RULES = exports.CART_TYPES = exports.CART_TYPE_DROPDOWN_ON_OPEN = exports.SHIPPING_METHODS_STATES = exports.CHECKOUT_STATES = exports.CART_STATES_AUTOMATION = exports.CART_STATES = exports.ADD_TO_CART_STATES = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_FORM_CONTAINER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ADDITIONAL_INFO = exports.NODE_TYPE_COMMERCE_CART_APPLE_PAY_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_ACTIONS = exports.NODE_TYPE_COMMERCE_ORDER_CONFIRMATION_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_PLACE_ORDER_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_TOGGLE_CHECKBOX = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_EMPTY_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_LIST = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_CUSTOMER_INFO_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_FORM_CONTAINER = exports.NODE_NAME_COMMERCE_ADD_TO_CART_QUANTITY_INPUT = exports.NODE_TYPE_COMMERCE_CART_FORM = exports.NODE_TYPE_COMMERCE_CART_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_CONTAINER = exports.NODE_TYPE_COMMERCE_CART_CONTAINER_WRAPPER = exports.NODE_TYPE_COMMERCE_CART_CLOSE_LINK = exports.NODE_TYPE_COMMERCE_CART_OPEN_LINK = exports.NODE_TYPE_COMMERCE_CART_WRAPPER = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_LIST = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_SELECT = exports.NODE_TYPE_COMMERCE_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_FORM = exports.DATA_ATTR_COUNT_HIDE_RULE = exports.DATA_ATTR_OPEN_ON_HOVER = exports.DATA_ATTR_OPEN_PRODUCT = exports.DATA_ATTR_LOADING_TEXT = exports.DATA_ATTR_NODE_TYPE = exports.DATA_ATTR_COMMERCE_PRODUCT_ID = exports.DATA_ATTR_COMMERCE_OPTION_SET_ID = exports.DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = exports.DATA_ATTR_COMMERCE_SKU_ID = void 0;
-exports.ORDER_TYPE = exports.CHECKOUT_BINDING_ROOT_QUERY_PATH = exports.symbolMap = exports.EDITABLE_STYLE_NAMES = exports.DATA_ATTR_PUBLISHABLE_KEY = exports.ANIMATION_DURATION_KEYPATH = exports.ANIMATION_DURATION_KEY = exports.ANIMATION_DURATION_DEFAULT = exports.DATA_ATTR_ANIMATION_DURATION = exports.ANIMATION_EASING_KEYPATH = exports.ANIMATION_EASING_KEY = exports.ANIMATION_EASING_DEFAULT = exports.DATA_ATTR_ANIMATION_EASING = exports.ADD_TO_CART_ERRORS = exports.CART_ERRORS = exports.CHECKOUT_ERRORS = exports.WF_SKU_CONDITION_DATA_KEY = exports.WF_SKU_BINDING_DATA_KEY = void 0;
+exports.WF_COLLECTION_DATA_KEY = exports.WF_CONDITION_DATA_KEY = exports.WF_BINDING_DATA_KEY = exports.DEFAULT_SKU_SLUG = exports.COMMERCE_PLUGIN_KEY = exports.COMMERCE_CATEGORY_COLLECTION_SLUG = exports.COMMERCE_PRODUCT_FIELD_SLUG = exports.COMMERCE_PRODUCT_COLLECTION_SLUG = exports.COMMERCE_SKU_FIELD_SLUG = exports.COMMERCE_SKU_COLLECTION_SLUG = exports.COMMERCE_CART_ITEM_ID_ATTR = exports.COMMERCE_CART_PUBLISHED_SITE_ACTIONS = exports.COMMERCE_CART_PUBLISHED_SITE_ACTION_ATTR = exports.CART_PRODUCT_ADDED_DEFAULT = exports.CART_PRODUCT_ADDED_KEYPATH = exports.CART_PRODUCT_ADDED_KEY = exports.CART_TYPE_DROPDOWN_ON_OPEN_KEY = exports.CART_TYPE_KEY = exports.CHECKOUT_PLACE_ORDER_LOADING_TEXT_DEFAULT = exports.CHECKOUT_PLACE_ORDER_BUTTON_TEXT_DEFAULT = exports.CART_CHECKOUT_LOADING_TEXT_DEFAULT = exports.CART_CHECKOUT_BUTTON_TEXT_DEFAULT = exports.LOADING_TEXT_DEFAULT = exports.LOADING_TEXT = exports.ADD_TO_CART_BUTTON_TEXT_DEFAULT = exports.HIDE_CART_COUNT_DEFAULT = exports.HIDE_CART_COUNT_KEYPATH = exports.HIDE_CART_COUNT_KEY = exports.HIDE_CART_WHEN_EMPTY_DEFAULT = exports.HIDE_CART_WHEN_EMPTY_KEYPATH = exports.HIDE_CART_WHEN_EMPTY_KEY = exports.BILLING_ADDRESS_TOGGLE_DEFAULT = exports.BILLING_ADDRESS_TOGGLE_KEYPATH = exports.BILLING_ADDRESS_TOGGLE_KEY = exports.OPEN_STATE_DEFAULT = exports.OPEN_STATE_KEYPATH = exports.OPEN_STATE_KEY = exports.SHIPPING_METHODS_STATE = exports.CHECKOUT_STATE = exports.QUICK_CHECKOUT_STATE_KEYPATH = exports.QUICK_CHECKOUT_STATE = exports.CART_STATE = exports.STATE = exports.QUANTITY_ENABLED_DEFAULT = exports.QUANTITY_ENABLED = exports.PREVIEW_ITEMS_KEYPATH = exports.PREVIEW_ITEMS_KEY = exports.PREVIEW_ITEMS_DEFAULT = exports.QUICK_CHECKOUT_AUTOMATION = exports.QUICK_CHECKOUT_STATES = exports.CART_COUNT_HIDE_RULES = exports.CART_TYPES = exports.CART_TYPE_DROPDOWN_ON_OPEN = exports.SHIPPING_METHODS_STATES = exports.CHECKOUT_STATES = exports.CART_STATES_AUTOMATION = exports.CART_STATES = exports.ADD_TO_CART_STATES = exports.NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_FORM_CONTAINER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ADDITIONAL_INFO = exports.NODE_TYPE_COMMERCE_CART_APPLE_PAY_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_ACTIONS = exports.NODE_TYPE_COMMERCE_ORDER_CONFIRMATION_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_PLACE_ORDER_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_TOGGLE_CHECKBOX = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_EMPTY_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_LIST = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_CUSTOMER_INFO_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_FORM_CONTAINER = exports.NODE_NAME_COMMERCE_ADD_TO_CART_QUANTITY_INPUT = exports.NODE_TYPE_COMMERCE_CART_FORM = exports.NODE_TYPE_COMMERCE_CART_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_CONTAINER = exports.NODE_TYPE_COMMERCE_CART_CONTAINER_WRAPPER = exports.NODE_TYPE_COMMERCE_CART_CLOSE_LINK = exports.NODE_TYPE_COMMERCE_CART_OPEN_LINK = exports.NODE_TYPE_COMMERCE_CART_WRAPPER = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_LIST = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_SELECT = exports.NODE_TYPE_COMMERCE_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_FORM = exports.DATA_ATTR_COUNT_HIDE_RULE = exports.DATA_ATTR_OPEN_ON_HOVER = exports.DATA_ATTR_OPEN_PRODUCT = exports.DATA_ATTR_LOADING_TEXT = exports.DATA_ATTR_NODE_TYPE = exports.DATA_ATTR_COMMERCE_PRODUCT_ID = exports.DATA_ATTR_COMMERCE_OPTION_SET_ID = exports.DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = exports.DATA_ATTR_COMMERCE_SKU_ID = void 0;
+exports.ORDER_TYPE = exports.CHECKOUT_BINDING_ROOT_QUERY_PATH = exports.symbolMap = exports.EDITABLE_STYLE_NAMES = exports.DATA_ATTR_PUBLISHABLE_KEY = exports.ANIMATION_DURATION_KEYPATH = exports.ANIMATION_DURATION_KEY = exports.ANIMATION_DURATION_DEFAULT = exports.DATA_ATTR_ANIMATION_DURATION = exports.ANIMATION_EASING_KEYPATH = exports.ANIMATION_EASING_KEY = exports.ANIMATION_EASING_DEFAULT = exports.DATA_ATTR_ANIMATION_EASING = exports.ADD_TO_CART_ERRORS = exports.CART_ERRORS = exports.CHECKOUT_ERRORS = exports.WF_SKU_CONDITION_DATA_KEY = exports.WF_SKU_BINDING_DATA_KEY = exports.WF_TEMPLATE_ID_DATA_KEY = void 0;
 var DATA_ATTR_COMMERCE_SKU_ID = 'data-commerce-sku-id';
 exports.DATA_ATTR_COMMERCE_SKU_ID = DATA_ATTR_COMMERCE_SKU_ID;
 var DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = 'data-commerce-product-sku-values';
@@ -62084,6 +62135,8 @@ var NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = 'commerce-checkout-discount-form
 exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM;
 var NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = 'commerce-checkout-discount-input';
 exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT;
+var NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = 'commerce-downloads-button';
+exports.NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON;
 var ADD_TO_CART_STATES = {
   DEFAULT: 'DEFAULT',
   OUT_OF_STOCK: 'OUT_OF_STOCK',
@@ -63483,7 +63536,7 @@ exports.escapeTokenString = escapeTokenString;
 exports.createTokenFromString = createTokenFromString;
 exports.getEmbedBindings = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _reduce = _interopRequireDefault(__webpack_require__(221));
 
@@ -65419,7 +65472,7 @@ exports.testCondition = void 0;
 
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(__webpack_require__(226));
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _DynamoConditionUtils = __webpack_require__(635);
 
@@ -69903,7 +69956,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.register = exports.renderCart = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _graphqlTag = _interopRequireDefault(__webpack_require__(56));
 
@@ -70801,7 +70854,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.register = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _debounce = _interopRequireDefault(__webpack_require__(231));
 
@@ -71333,7 +71386,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = exports.register = void 0;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(3));
+var _extends2 = _interopRequireDefault(__webpack_require__(4));
 
 var _graphqlTag = _interopRequireDefault(__webpack_require__(56));
 

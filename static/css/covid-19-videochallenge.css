@@ -4716,6 +4716,7 @@ p {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 20px;
+  background-color: #05a4fb;
   color: #fff;
   font-size: 11px;
   font-weight: 700;
@@ -5004,6 +5005,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  max-height: 75px;
   text-decoration: none;
 }
 
@@ -7187,7 +7189,6 @@ p {
   color: rgba(1, 1, 1, 0.6);
   font-size: 12px;
   letter-spacing: 2.5px;
-  text-transform: uppercase;
 }
 
 .h6_new.centered {
@@ -7266,7 +7267,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 24px;
+  padding: 12px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -7312,7 +7313,7 @@ p {
   display: -ms-flexbox;
   display: flex;
   max-width: 1620px;
-  margin: 64px auto;
+  margin: 128px auto;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
@@ -8411,8 +8412,7 @@ p {
   }
   .featured_content {
     display: block;
-    margin-right: 0px;
-    margin-left: 0px;
+    margin: 64px 0px;
   }
   .featured_text_content {
     max-width: 100%;
@@ -9638,9 +9638,13 @@ p {
   .login_btn {
     min-height: 41px;
     margin-left: 12px;
-    background-color: #f17020;
+    background-color: #05a4fb;
   }
   .login_btn.no-margin {
+    margin-left: 0px;
+  }
+  .login_btn.right-margin {
+    margin-right: 16px;
     margin-left: 0px;
   }
   .header_btns {
@@ -9701,6 +9705,7 @@ p {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    max-height: 65px;
   }
   .share-section {
     display: none;
@@ -10475,6 +10480,7 @@ p {
   }
   .h1.hero {
     max-width: 80%;
+    font-size: 36px;
   }
   .h3_new {
     font-size: 16px;
@@ -10482,14 +10488,18 @@ p {
   }
   .h3_new._560_max_w {
     margin-top: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
     line-height: 160%;
   }
   .h6_new.white {
     color: hsla(0, 0%, 97.3%, 0.8);
   }
   .intro_content {
+    margin-top: 48px;
     margin-bottom: 48px;
+  }
+  .about_illustration {
+    padding: 0px;
   }
   .featured_section {
     display: none;
@@ -10566,12 +10576,14 @@ p {
   }
   .hero_illustration_mobile {
     position: absolute;
-    left: 0%;
+    left: auto;
     top: auto;
-    right: 0%;
-    bottom: 0%;
-    max-width: 100%;
-    margin-left: 0px;
+    right: auto;
+    bottom: 2%;
+    display: block;
+    max-width: 85%;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
