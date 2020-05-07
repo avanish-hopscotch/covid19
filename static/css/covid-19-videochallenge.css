@@ -4248,6 +4248,7 @@ p {
   margin-top: 0px;
   font-family: Montserrat, sans-serif;
   color: #000;
+  font-size: 28px;
 }
 
 .paragraph-7 {
@@ -4330,6 +4331,7 @@ p {
 }
 
 .button-12 {
+  margin-bottom: 60px;
   border-radius: 19px;
   background-color: #314dbd;
   font-family: Montserrat, sans-serif;
@@ -4479,7 +4481,7 @@ p {
 }
 
 .heading-25 {
-  margin-top: 40px;
+  margin-top: 100px;
   margin-bottom: 0px;
   color: #000;
   text-align: center;
@@ -6585,7 +6587,9 @@ p {
 
 .text-block-31 {
   font-family: Montserrat, sans-serif;
-  color: #000;
+  color: #4d4d4d;
+  font-size: 12px;
+  text-align: left;
 }
 
 .challange_label {
@@ -7635,6 +7639,14 @@ p {
   width: 100%;
   max-width: 350px;
   margin-left: 48px;
+}
+
+.text-block-34 {
+  margin-left: 30px;
+  font-family: Montserrat, sans-serif;
+  color: #4d4d4d;
+  font-size: 12px;
+  text-align: left;
 }
 
 @media screen and (max-width: 991px) {
@@ -8900,6 +8912,7 @@ p {
     text-align: center;
   }
   .paragraph-11 {
+    margin-top: 20px;
     margin-bottom: 0px;
     font-family: Montserrat, sans-serif;
     color: #000;
@@ -9061,8 +9074,6 @@ p {
   }
   .body-2 {
     background-color: #fbf8f8;
-    background-image: url('../images/images.jpg');
-    background-position: 0px 0px;
   }
   .section-5 {
     background-image: url('../images/pixel-cells-3974168.png');
@@ -10213,6 +10224,10 @@ p {
   .footer-heading {
     margin-top: 20px;
   }
+  .text-block-31 {
+    color: #4d4d4d;
+    font-size: 10px;
+  }
   .challange_info__label {
     max-width: 200px;
     margin-bottom: 0px;
@@ -10584,6 +10599,12 @@ p {
     max-width: 85%;
     margin-right: auto;
     margin-left: auto;
+  }
+  .text-block-34 {
+    margin-left: 0px;
+  }
+  .link-10 {
+    font-size: 11.5px;
   }
 }
 

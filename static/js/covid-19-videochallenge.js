@@ -31428,7 +31428,7 @@ var SCHEDULED_PUBLISH_LIMIT_IN_MS = 5 * YEAR;
  */
 
 exports.SCHEDULED_PUBLISH_LIMIT_IN_MS = SCHEDULED_PUBLISH_LIMIT_IN_MS;
-var SCHEDULED_PUBLISH_GRACE_PERIOD_IN_MS = 5 * MINUTE;
+var SCHEDULED_PUBLISH_GRACE_PERIOD_IN_MS = 30 * MINUTE;
 /* An enum of the types of collections in our app. This allows us to handle
  * cases based on collection type by using the function getCollectionType
  */
@@ -52552,7 +52552,15 @@ var retryLink = new _apolloLinkRetry.RetryLink({
   attempts: function attempts(count, _operation, error) {
     if (count >= MAX_RETRIES) {
       return false;
-    }
+    } // if the request fails, let's try it again because it was probably
+    // a temporary issue.
+
+
+    if (error && error.statusCode >= 500) {
+      return true;
+    } // if CORS fails, it means we used a stale token so we can try it again
+    // with the correct one
+
 
     if (error && error.result && error.result.code === 'BadCrossOriginRequest') {
       return true;
