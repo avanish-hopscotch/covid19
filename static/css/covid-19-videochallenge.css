@@ -4564,8 +4564,9 @@ p {
 .login-label-sub {
   display: block;
   margin-top: 16px;
+  font-family: Montserrat, sans-serif;
   color: rgba(0, 0, 0, 0.6);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 140%;
   font-weight: 400;
   text-align: center;
@@ -9028,8 +9029,8 @@ p {
     color: #000;
   }
   .heading-25 {
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 25px;
+    margin-left: 25px;
     background-color: #fff;
     font-family: Montserrat, sans-serif;
     color: #5e5b5b;
@@ -9121,6 +9122,7 @@ p {
     text-align: left;
   }
   .btn.orange {
+    margin-top: 0px;
     border-radius: 40px;
     background-color: #f17020;
   }
@@ -10605,6 +10607,9 @@ p {
   }
   .link-10 {
     font-size: 11.5px;
+  }
+  .image-16 {
+    margin-top: 20px;
   }
 }
 
