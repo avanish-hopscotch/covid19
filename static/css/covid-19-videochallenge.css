@@ -10591,7 +10591,7 @@ p {
     width: 40px;
     height: 40px;
   }
-  /* .hero_illustration_mobile {
+  .hero_illustration_mobile {
     position: absolute;
     left: auto;
     top: auto;
@@ -10601,7 +10601,7 @@ p {
     max-width: 85%;
     margin-right: auto;
     margin-left: auto;
-  } */
+  }
   .text-block-34 {
     margin-left: 0px;
   }

@@ -54,6 +54,10 @@
   border-top: 1px solid #cccccc;
 }
 
+#challenge_btn {
+  text-transform: none !important;
+}
+
 @media (min-width: 1025px){ 
   .h6_new {
     font-size: 16px !important;
@@ -66,14 +70,23 @@
   .h3_new {
     font-size: 22px !important;
   }
+
+  .container-3 {
+    max-width: 100% !important;
+  }
 } 
 
 @media screen and (max-width: 479px) {
   .hero_content {
     flex-wrap: wrap !important;
+    max-height: none !important;
   }
   .hero_illustration_mobile {
     margin: 0 auto !important;
     margin-top: 24px !important;
+    position: relative !important;
+    max-width: none !important;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
