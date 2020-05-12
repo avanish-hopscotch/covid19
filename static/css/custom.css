@@ -10,7 +10,7 @@
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 9998;
   }
   
   .dropdown-content a {
@@ -25,6 +25,12 @@
     display: block !important;
 }
 
+.show_flex {
+  height: auto !important;
+  opacity: 1 !important;
+  padding-top: 24px !important;
+}
+
 .footer_section {
     width: 100%;
 }
@@ -34,7 +40,7 @@
 }
 
 .nav_mobile {
-  z-index: 3;
+  z-index: 9999;
   position: fixed;
   display: none;
   text-align: center;
@@ -74,7 +80,31 @@
   .container-3 {
     max-width: 100% !important;
   }
-} 
+}
+
+.dashboard-ui-bg-layout {
+  height: auto !important;
+}
+
+.challange_module_wrap {
+  max-height: none !important;
+  height: auto !important;
+}
+
+.challange_btn {
+  float: left !important;
+  margin-right: 2px;
+  margin-top: 2px;
+  min-width: 190px !important;
+}
+
+.challange_visual_wrap {
+  padding: 5px;
+}
+
+.play_btn {
+  padding: 24px !important;
+}
 
 @media screen and (max-width: 479px) {
   .hero_content {
@@ -88,5 +118,51 @@
     max-width: none !important;
     margin-right: auto;
     margin-left: auto;
+  }
+  .nav-link.w--current {
+    line-height: 22px !important;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 12px !important;
+    border-top: 1px solid #cccccc !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .challange_illustration {
+    width: -webkit-calc(100% - 220px);
+    width:    -moz-calc(100% - 220px);
+    width:         calc(100% - 220px);
+    height: auto !important;
+    margin-top: 24px !important;
+  }
+  
+  .challange_btns_wrap {
+    margin-top: 0px !important;
+    padding-top: 0px;
+    height: 0px;
+    opacity: 0;
+  }
+
+  .challange_btn {
+    float: left !important;
+    margin-right: 2px;
+    min-width: 150px !important;
+    font-size: 10px !important;
+    padding: 2px 0px !important;
+    margin-bottom: 2px;
+    letter-spacing: 1.2px !important;
+  }
+}
+
+@media screen and (max-width: 360px) { 
+  .challange_btn {
+    float: left !important;
+    margin-right: 2px;
+    min-width: 125px !important;
+    font-size: 9px !important;
+    padding: 2px 0px !important;
+    margin-bottom: 2px;
+    letter-spacing: 1.1px !important;
   }
 }

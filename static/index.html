@@ -8,6 +8,7 @@
     <meta content="Home-page" property="og:title">
     <meta content="Home-page" property="twitter:title">
     <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- add custom css -->
     <link href="css/custom.css" rel="stylesheet" type="text/css">
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/components.css" rel="stylesheet" type="text/css">
@@ -44,20 +45,11 @@
                     </div>
                 </div>
                 <div class="nav-btns-flex">
-                    <a href="videolibrary.html" class="nav-link w-nav-link">video library</a>
-                    <a href="videochallenges.html" class="nav-link w-nav-link">VIDEO CHALLENGES</a>
-                    <a href="faqs.html" class="nav-link w-nav-link">FAQs</a>
-                    <a href="terms-and-conditions.html" class="nav-link w-nav-link">Privacy Policy</a>
-                    <a href="videolibrary.html" class="nav-link w-nav-link">LOGIN/SIGN UP</a>
-                    <!-- <a href="#" class="lng-btn w-button">Language</a> -->
+                    <div class="nav_for_index">
+                    </div>
                     <div class="dropdown">
-                        <button onclick="openLang()" class="lng-btn w-button dropbtn">Language</button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a onclick="languageChange('en')">English</a>
-                            <a onclick="languageChange('hi')">Hindi</a>
-                            <a onclick="languageChange('ma')">Marathi</a>
-                            <a onclick="languageChange('be')">Bengali</a>
-                            <a onclick="languageChange('ta')">Tamil</a>
+                        <button onclick="openLangDesktop()" class="lng-btn w-button dropbtn">Language</button>
+                        <div id="myDropdownDesktop" class="dropdown-content lang-dropdown">
                         </div>
                     </div>
                 </div>
@@ -71,13 +63,8 @@
         </a>
         <div class="header_btns">
             <div class="dropdown">
-                <button onclick="openLangDesktop()" class="login_btn right-margin w-button dropbtn">LANGUAGE</button>
-                <div id="myDropdownDesktop" class="dropdown-content">
-                    <a onclick="languageChange('en')">English</a>
-                    <a onclick="languageChange('hi')">Hindi</a>
-                    <a onclick="languageChange('ma')">Marathi</a>
-                    <a onclick="languageChange('be')">Bengali</a>
-                    <a onclick="languageChange('ta')">Tamil</a>
+                <button onclick="openLang()" class="login_btn right-margin w-button dropbtn">LANGUAGE</button>
+                <div id="myDropdown" class="dropdown-content lang-dropdown">
                 </div>
             </div>
             <div class="ham right" id="nav" onclick="openNav();">
@@ -85,12 +72,13 @@
                 <div class="hamburger-line bottom-padding-2px"></div>
                 <div class="hamburger-line"></div>
             </div>
-            <div class="nav_mobile" id="nav-mobile">
-                <a href="videolibrary.html" class="nav-link w-nav-link">video library</a>
-                <a href="videochallenges.html" class="nav-link w-nav-link">VIDEO CHALLENGES</a>
-                <a href="faqs.html" class="nav-link w-nav-link">FAQs</a>
-                <a href="terms-and-conditions.html" class="nav-link w-nav-link">Privacy Policy</a>
-                <a href="videolibrary.html" class="nav-link w-nav-link">LOGIN/SIGN UP</a>
+            <div class="nav_mobile nav_for_index" id="nav-mobile">
+                <!-- <a href="videolibrary.html" class="nav-link w-nav-link" id="nav_challenge">video library</a>
+                <a href="videochallenges.html" class="nav-link w-nav-link" id="nav_library">VIDEO CHALLENGES</a>
+                <a href="faqs.html" class="nav-link w-nav-link" id="nav_faq">FAQs</a>
+                <a href="terms-and-conditions.html" class="nav-link w-nav-link" id="nav_privacypolicy">Privacy
+                    Policy</a>
+                <a href="../login/index.html" class="nav-link w-nav-link" id="nav_login">LOGIN/SIGN UP</a> -->
             </div>
         </div>
     </div>
@@ -162,226 +150,11 @@
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 </body>
 
-
+<!-- add custom scripts -->
 <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
 <script src="js/config.js"></script>
-<script>
-    $(document).ready(function () {
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        if (localStorage.getItem("language")) {
-            updateContent(localStorage.getItem("language"));
-        } else {
-            updateContent('en');
-
-        }
-
-    })
-
-    function openLangDesktop() {
-        document.getElementById("myDropdownDesktop").classList.toggle("show");
-    }
-
-    function openLang() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function openNav() {
-        document.getElementById("nav-mobile").classList.toggle("show-nav");
-    }
-
-    function languageChange(value) {
-        localStorage.setItem("language", value);
-        updateContent(value);
-    }
-
-
-
-    function updateContent(lang) {
-        featureData(lang);
-        var en = {
-            "menu": {
-                "home": "HOME",
-                "video_challenge": "VIDEO CHALLENGES",
-                "video_library": "VIDEO LIBRARY",
-                "faq": "FAQS",
-                "login": "LOGIN"
-            },
-            "home": {
-                "title": "Record KaroNa",
-                "heading": "The battle against Coronavirus isn't over.",
-                "description": "As India emerges from lockdown, amplifying the right information is crucial to help tackle the spread of Coronavirus. Use your platform as a community leader to record and share important public health messages that reach your followers.",
-                "challenge_button": "Take a video challenge",
-                "about": "ABOUT",
-                "text1": "Use your platform to make a difference",
-                "text1_description": "Record public service announcements created by public health experts upload it to our Video Library.",
-                "text2": "Share your Public Service Announcement",
-                "text2_description": "Share your videos to your various social media accounts to spread the word! Droplets make an ocean.",
-                "text3": "Drive healthy behaviours",
-                "text3_description": "Watch videos of your friends, neighbours, and the world taking measures to fight Coronavirus. See what they’re saying!"
-            }
-        }
-
-        var hi = {
-            "menu": {
-                "home": "घर",
-                "video_challenge": "वीडियो चुनौती",
-                "video_library": "वीडियो पुस्तकालय",
-                "faq": "सामान्य प्रश्नोत्तर",
-                "login": "लॉग इन करें"
-            },
-            "home": {
-                "title": "COVID-19 वीडियो चुनौती",
-                "heading": "आओ मिलकर कोविद -19 को हराएं.",
-                "description": "हमें बताएं कि आप क्या कर रहे हैं और कोरोनोवायरस-मुक्त रहने में क्या लगता है! एक साथ शब्द और #flattenthecurve फैलाएं!",
-                "challenge_button": "एक वीडियो चुनौती लें",
-                "about": "के बारे में",
-                "text1": "एक फर्क करने के लिए अपने मंच का उपयोग करें",
-                "text1_description": "सार्वजनिक स्वास्थ्य विशेषज्ञों द्वारा बनाई गई रिकॉर्ड सार्वजनिक सेवा की घोषणाएं इसे हमारे वीडियो लाइब्रेरी में अपलोड करती हैं।",
-                "text2": "लूप में रहें",
-                "text2_description": "अपने दोस्तों, पड़ोसियों, और दुनिया को कोरोनोवायरस से लड़ने के उपाय करते हुए देखें - देखें कि वे क्या कह रहे हैं!",
-                "text3": "अपनी सार्वजनिक सेवा घोषणा साझा करें",
-                "text3_description": "शब्द फैलाने के लिए अपने वीडियो अपने विभिन्न सोशल मीडिया खातों में साझा करें! बूंदें एक महासागर बनाती हैं।"
-            }
-        }
-
-        var ma = {
-            "menu": {
-                "home": "सुरुवात",
-                "video_challenge": " व्हिडियो आव्हान",
-                "video_library": "सगळे व्हिडिओस",
-                "faq": "प्रश्नांचे उत्तर",
-                "login": "लॉगिन"
-            },
-            "home": {
-                "title": "कोविद १९  व्हिडियो आव्हान",
-                "heading": "कोविद १९ चा पसर थांबवा, स्वतः. इकडे फ्री मध्ये नोंदणी करा.",
-                "description": "कोविद पसरा थांबवणे याचा साठी तुम्ही काय उपाय घेत आहात.एकत्र कोविद थांबूया!",
-                "challenge_button": "व्हिडियो आव्हान घ्या",
-                "about": "जाणीव",
-                "text1": "आपला व्यासपीठ वापर, लोकांना माहिती देण्या करिता",
-                "text1_description": "आरोग्य तज्ञ नि दिलेली घोषणा चे विडिओ रेकॉर्ड करा आणि अपलोड करा",
-                "text2": "माहिती ठेवा",
-                "text2_description": "इथे बघा आपले मित्र, शेजारचे अँड जगातील लोक काय उपाय घेत आहेत, कॉरोन विरुद्ध लढायला",
-            }
-        }
-
-
-        var be = {
-            "menu": {
-                "home": "হোমপেজে যান",
-                "video_challenge": "ভিডিও চ্যালেঞ্জগুলো",
-                "video_library": "ভিডিও সংকলন",
-                "faq": "কিছু সাধারন প্রশ্নের উত্তর",
-                "login": "লগ-ইন"
-            },
-            "home": {
-                "title": "কোভিড-১৯ ভিডিও চ্যালেঞ্জ",
-                "heading": " আসুন, কোভিড-১৯কে হারাতে একসাথে এগোনো যাক",
-                "description": " আমাদেরকে বলুন আপনি কি করছেন করোনাভাইরাসের থেকে নিজেকে সুরক্ষিত রাখতে! আসুন, বার্তা ছড়িয়ে দেওয়া যাক, এবং একসাথে আমরা করোনা সংক্রমণের গতিবেগকে কমিয়ে আনি!",
-                "challenge_button": "একটি ভিডিও চ্যালেঞ্জে অংশগ্রহণ করুন",
-                "about": "এর ব্যাপারে জানুন",
-                "text1": "আপনার অনলাইন উপস্থিতিকে কাজে লাগান একটা ইতিবাচক প্রভাব ফেলতে",
-                "text1_description": "গনস্বাস্থ্য বিজ্ঞানীদের দ্বারা বানানো  জনসচেতনতা মূলক বার্তা রেকর্ড করে আমাদের ভিডিও লাইব্রেরিতে আপলোড করুন",
-                "text2": "এই লুপটিতে থাকুন",
-                "text2_description": "আপনার বন্ধু, প্রতিবেশী এবং অন্যান্যদের বানানো ভিডিও দেখুন - তাঁরা কিভাবে করোনাভাইরাসের সংক্রমন ঠেকাতে নিজেদেরকে সুরক্ষিত রাখছেন - দেখুন তাঁরা কি বলছেন!"
-                ,
-                "text3": " আপনার জনসচেতনতামূলক বার্তাটি শেয়ার করুন",
-                "text3_description": "আপনার ভিডিওগুলোকে বিভিন্ন সোশ্যাল মিডিয়া প্ল্যাটফর্মে শেয়ার করুন, যাতে বার্তা ছড়িয়ে দেওয়া যায়! বিন্দুতে বিন্দুতেই সিন্ধু হয়!"
-
-            }
-        }
-
-        var ta = {
-            "menu": {
-                "home": "முகப்பு",
-                "video_challenge": "வீடியோ சவால்கள்",
-                "video_library": "வீடியோ லைப்ரரி",
-                "faq": "அடிக்கடி கேட்கப்படும் கேள்விகள்",
-                "login": "உள்நுழை"
-            },
-            "home": {
-                "title": "கோவிட் -19 வீடியோ சவால் ",
-                "heading": "கோவிட் -19 ஐ வெல்ல ஒன்றாக வாருங்கள்",
-                "description": "நீங்கள் கொரோனா வைரஸ் இல்லாத நிலையில் உருவாக்க என்ன செய்கிறீர்கள்,என்ன தேவை என்று எங்களிடம் கூறுங்கள்! இந்த வார்த்தையை பரப்புவோம், #flattenthecurve ஒன்றாக!",
-                "challenge_button": "வீடியோ சவாலை எடுத்துக் கொள்ளுங்கள்",
-                "about": "எங்களை  பற்றி",
-                "text1": "ஒரு வித்தியாசத்தை உருவாக்க உங்கள் தளத்தைப் பயன்படுத்தவும்",
-                "text1_description": "பொது சுகாதார வல்லுநர்களால் உருவாக்கப்பட்ட பொது சேவை அறிவிப்புகளை எங்கள் வீடியோ நூலகத்தில் பதிவேற்றம் செய்க",
-                "text2": " வளையத்தில் இருங்கள்",
-                "text2_description": "உங்கள் நண்பர்கள், அயலவர்கள் மற்றும் உலகம் கொரோனா வைரஸை எதிர்த்துப் போராட நடவடிக்கை எடுக்கும் வீடியோக்களைப் பாருங்கள் - அவர்கள் என்ன சொல்கிறார்கள் என்று பாருங்கள்!",
-                "text3": "உங்கள் பொது சேவை அறிவிப்பைப் பகிரவும்",
-                "text3_description": "உங்கள் வீடியோக்களை உங்கள் பல்வேறு சமூக ஊடக கணக்குகளில் பகிர்ந்து கொள்ளுங்கள். நீர்த்துளிகள் ஒரு சமுத்திரத்தை உருவாக்கும்"
-
-
-            }
-        }
-        selectLang = en;
-        switch (lang) {
-            case "en":
-                selectLang = en;
-                break;
-            case "hi":
-                selectLang = hi;
-                break;
-            case "ma":
-                selectLang = ma;
-                break;
-            case "be":
-                selectLang = be;
-                break;
-            case "ta":
-                selectLang = ta;
-                break;
-
-        }
-        $('#nav_home').html(selectLang.menu.home);
-        $('#nav_challenge').html(selectLang.menu.video_challenge);
-        $('#nav_library').html(selectLang.menu.video_library);
-        $('#nav_faq').html(selectLang.menu.faq);
-        $('#nav_login').html(selectLang.menu.login);
-
-        $('#title').html(selectLang.home.title);
-        $('#heading').html(selectLang.home.heading);
-        $('#paragraph').html(selectLang.home.description);
-        $('#challenge_btn').html(selectLang.home.challenge_button);
-
-
-        $('#about').html(selectLang.home.about);
-        $('#text1').html(selectLang.home.text1);
-        $('#text1_description').html(selectLang.home.text1_description);
-        $('#text2').html(selectLang.home.text2);
-        $('#text2_description').html(selectLang.home.text2_description);
-        $('#text3').html(selectLang.home.text3);
-        $('#text3_description').html(selectLang.home.text3_description);
-    }
-    function featureData(lang) {
-        firebase.firestore().collection("dailyfeaturevideohomepage").doc(lang).get().then(function (querySnapshot) {
-            if (!querySnapshot.exists) {
-                $('.w-dyn-empty').show();
-                $('.firebaseData').html("");
-            } else {
-                const data = querySnapshot.data();
-                $('.w-dyn-empty').hide();
-                $('.firebaseData').html('<h2 class="heading-16"><strong class="bold-text-12">' + data.title + ' </strong></h2><div class="text-block-22"><a href="#" class="link-7">' + data.text + '</a></div><div class="w-dyn-list"><div class="w-dyn-items"><div class="w-dyn-item"><div class="w-row"><div class="w-col w-col-6"><div style="padding-top:56.17021276595745%" class="w-video w-embed"><iframe class="embedly-embed" src="' + data.video_url + '" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe></div></div><div class="column-22 w-col w-col-6"><h2 class="heading-17">' + data.video_title + '</h2><p class="paragraph-7">' + data.video_text + '</p></div></div></div></div></div>'
-                );
-
-            }
-
-        });
-    }
-</script>
+<script src="js/app.js"></script>
+<!-- js file for index page -->
+<script src="js/index.js"></script>
 
 </html>
