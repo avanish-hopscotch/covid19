@@ -12084,7 +12084,7 @@ var getOrderDataFromGraphQLResponse = function getOrderDataFromGraphQLResponse(d
 exports.getOrderDataFromGraphQLResponse = getOrderDataFromGraphQLResponse;
 
 var orderRequiresAdditionalAction = function orderRequiresAdditionalAction(status) {
-  return status === 'requires_action' || status === 'requires_source_action';
+  return status === 'requires_action';
 };
 
 exports.orderRequiresAdditionalAction = orderRequiresAdditionalAction;
@@ -39036,7 +39036,12 @@ var SharedConfig = function () {
     unknown: 'unknown'
   };
   api.ANALYTICS_SESSION_POLLING_FREQUENCY = 30000;
-  api.TEMPLATE_GENERATION_TEMPLATE_NAME = 'Templatized Base Theme'; // Export commonjs module
+  api.TEMPLATE_GENERATION_TEMPLATE_NAME = 'Templatized Base Theme';
+  api.blankTemplate = {
+    name: 'Blank Site',
+    description: 'Start from a blank canvas — and build exactly what you’re envisioning.',
+    starter: true
+  }; // Export commonjs module
 
   if ( true && module.exports) {
     module.exports = api;

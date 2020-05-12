@@ -7120,6 +7120,7 @@ p {
 
 .cta_btn.orange {
   background-color: #f17020;
+  font-size: 14px;
 }
 
 .cta_btn.centered {
@@ -7140,7 +7141,7 @@ p {
   display: flex;
   max-height: 80vh;
   min-height: 620px;
-  padding: 64px 14%;
+  padding: 240px 14% 64px;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -7160,6 +7161,10 @@ p {
   line-height: 110%;
 }
 
+.h1.hero {
+  margin-top: 10px;
+}
+
 .h3_new {
   font-family: Roboto, sans-serif;
   font-size: 20px;
@@ -7168,11 +7173,12 @@ p {
 
 .h3_new._560_max_w {
   max-width: 560px;
-  margin-bottom: 32px;
+  margin-bottom: 10px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
   color: rgba(1, 1, 1, 0.75);
+  font-size: 24px;
   line-height: 160%;
 }
 
@@ -7192,7 +7198,7 @@ p {
   align-self: flex-start;
   font-family: Montserrat, sans-serif;
   color: rgba(1, 1, 1, 0.6);
-  font-size: 12px;
+  font-size: 18px;
   letter-spacing: 2.5px;
 }
 
