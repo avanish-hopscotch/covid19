@@ -57542,7 +57542,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2["default"])(["\n  mutation AddToCart($skuId: String!, $count: Int!) {\n    ecommerceAddToCart(sku: $skuId, count: $count) {\n      ok\n      itemId\n      itemCount\n      itemPrice {\n        unit\n        decimalValue\n      }\n    }\n  }\n"]);
+  var data = (0, _taggedTemplateLiteral2["default"])(["\n  mutation AddToCart($skuId: String!, $count: Int!, $buyNow: Boolean) {\n    ecommerceAddToCart(sku: $skuId, count: $count, buyNow: $buyNow) {\n      ok\n      itemId\n      itemCount\n      itemPrice {\n        unit\n        decimalValue\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -57585,8 +57585,37 @@ var _forEach = _interopRequireDefault(__webpack_require__(134));
 var _find = _interopRequireDefault(__webpack_require__(119));
 
 var _rendering = __webpack_require__(113);
-/* globals document, window, Element, HTMLElement, CustomEvent, HTMLFormElement, HTMLInputElement, HTMLSelectElement */
+/* globals document, window, Element, HTMLElement, CustomEvent, HTMLFormElement, HTMLInputElement, HTMLSelectElement, HTMLAnchorElement*/
 
+
+function trackAddToCartUsage(skuId, count, itemPrice) {
+  var decimalValue = itemPrice.decimalValue,
+      unit = itemPrice.unit;
+
+  if (typeof fbq === 'function') {
+    fbq('track', 'AddToCart', {
+      value: count * decimalValue,
+      currency: unit,
+      content_ids: [skuId],
+      content_type: 'product',
+      contents: [{
+        id: skuId,
+        quantity: count,
+        item_price: decimalValue
+      }]
+    });
+  }
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'add_to_cart', {
+      items: [{
+        id: skuId,
+        quantity: count,
+        price: decimalValue
+      }]
+    });
+  }
+}
 
 var addToCartMutation = _graphqlTag["default"](_templateObject());
 
@@ -57645,7 +57674,8 @@ var handleAtcSubmit = function handleAtcSubmit(event, apolloClient) {
     mutation: addToCartMutation,
     variables: {
       skuId: skuId,
-      count: count
+      count: count,
+      buyNow: false
     }
   }).then(function (_ref) {
     var data = _ref.data;
@@ -57664,34 +57694,8 @@ var handleAtcSubmit = function handleAtcSubmit(event, apolloClient) {
       });
     });
     (0, _commerceUtils.triggerRender)(null);
-
-    var _ref2 = data.ecommerceAddToCart.itemPrice || {},
-        decimalValue = _ref2.decimalValue,
-        unit = _ref2.unit;
-
-    if (typeof fbq === 'function') {
-      fbq('track', 'AddToCart', {
-        value: count * decimalValue,
-        currency: unit,
-        content_ids: [skuId],
-        content_type: 'product',
-        contents: [{
-          id: skuId,
-          quantity: count,
-          item_price: decimalValue
-        }]
-      });
-    }
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'add_to_cart', {
-        items: [{
-          id: skuId,
-          quantity: count,
-          price: decimalValue
-        }]
-      });
-    }
+    var itemPrice = data.ecommerceAddToCart.itemPrice || {};
+    trackAddToCartUsage(skuId, count, itemPrice);
   })["catch"](function (error) {
     eventTarget.removeAttribute('data-wf-atc-loading');
     inputButton.value = previousButtonValue;
@@ -57811,8 +57815,8 @@ var handleAtcOptionSelectChange = function handleAtcOptionSelectChange(event, ap
       variables: {
         productId: productId
       }
-    }).then(function (_ref4) {
-      var data = _ref4.data;
+    }).then(function (_ref3) {
+      var data = _ref3.data;
       var items = data && data.database && data.database.collections && data.database.collections.c_sku_ && data.database.collections.c_sku_.items ? data.database.collections.c_sku_.items : [];
       var newSkuItem = (0, _find["default"])(items, function (item) {
         if (item.f_sku_values_3dr && Array.isArray(item.f_sku_values_3dr)) {
@@ -58078,8 +58082,8 @@ var handleAtcOptionSelectLoad = function handleAtcOptionSelectLoad(event, apollo
         variables: {
           productId: productId
         }
-      }).then(function (_ref5) {
-        var data = _ref5.data;
+      }).then(function (_ref4) {
+        var data = _ref4.data;
         var items = data && data.database && data.database.collections && data.database.collections.c_sku_ && data.database.collections.c_sku_.items ? data.database.collections.c_sku_.items : [];
         var currentSku = items.find(function (item) {
           return item.id === currentSkuId;
@@ -58224,9 +58228,109 @@ var updateLightboxJson = function updateLightboxJson(node, binding) {
   }
 };
 
+var isBuyNowButtonEvent = function isBuyNowButtonEvent(_ref5) {
+  var target = _ref5.target;
+  return target instanceof Element && target.getAttribute(_constants.DATA_ATTR_NODE_TYPE) === _constants.NODE_TYPE_COMMERCE_BUY_NOW_BUTTON;
+};
+
+var handleBuyNow = function handleBuyNow(event, apolloClient) {
+  event.preventDefault(); // Don't try and do anything in preview mode
+
+  if (window.Webflow.env('preview')) {
+    return;
+  }
+
+  var buyNowButton = event.target;
+  var addToCartForm = (0, _commerceUtils.findClosestElementByNodeType)(_constants.NODE_TYPE_COMMERCE_ADD_TO_CART_FORM, buyNowButton);
+
+  if (!(buyNowButton instanceof HTMLAnchorElement) || !(addToCartForm instanceof HTMLFormElement)) {
+    return;
+  }
+
+  var addToCartWrapper = addToCartForm.parentElement;
+
+  if (!(addToCartWrapper instanceof Element)) {
+    return;
+  }
+
+  var addToCartErrorElement = (0, _commerceUtils.findElementByNodeType)(_constants.NODE_TYPE_COMMERCE_ADD_TO_CART_ERROR, addToCartWrapper);
+
+  if (!(addToCartErrorElement instanceof Element)) {
+    return;
+  }
+
+  addToCartErrorElement.style.display = 'none';
+
+  if (!(0, _commerceUtils.isProtocolHttps)()) {
+    window.alert('This site is currently unsecured so you cannot purchase this item.');
+    return;
+  } // Confirm atc selection is valid
+
+
+  if (!addToCartForm.reportValidity()) {
+    return;
+  }
+
+  var publishableKey = buyNowButton.getAttribute(_constants.DATA_ATTR_PUBLISHABLE_KEY); // If no publishable key checkout is not enabled
+
+  if (!publishableKey) {
+    var errorMsg = addToCartErrorElement.querySelector('.w-add-to-cart-error-msg');
+    console.log(errorMsg);
+
+    if (!errorMsg) {
+      return;
+    }
+
+    var errorText = errorMsg.getAttribute('data-w-add-to-cart-checkout-disabled-error') || 'Checkout is disabled.';
+    console.log(errorText);
+    errorMsg.textContent = errorText;
+    addToCartErrorElement.style.removeProperty('display');
+    return;
+  }
+
+  var skuId = addToCartForm.getAttribute(_constants.DATA_ATTR_COMMERCE_SKU_ID) || '';
+  var formData = (0, _commerceUtils.formToObject)(addToCartForm);
+  var formCount = formData[_constants.NODE_NAME_COMMERCE_ADD_TO_CART_QUANTITY_INPUT];
+  var count = formCount ? parseInt(formCount, 10) : 1;
+  apolloClient.mutate({
+    mutation: addToCartMutation,
+    variables: {
+      skuId: skuId,
+      count: count,
+      buyNow: true
+    }
+  }).then(function (_ref6) {
+    var data = _ref6.data;
+    var itemPrice = data.ecommerceAddToCart.itemPrice || {};
+    trackAddToCartUsage(skuId, count, itemPrice);
+    window.location = buyNowButton.href;
+  })["catch"](function (error) {
+    if (addToCartErrorElement) {
+      addToCartErrorElement.style.removeProperty('display');
+
+      var _errorMsg = addToCartErrorElement.querySelector('.w-add-to-cart-error-msg');
+
+      if (!_errorMsg) {
+        return;
+      }
+
+      var errorType = error.graphQLErrors && error.graphQLErrors.length > 0 && error.graphQLErrors[0].code === 'OutOfInventory' ? 'quantity' : 'buy-now';
+
+      var _errorText = _errorMsg.getAttribute("data-w-add-to-cart-".concat(errorType, "-error")) || '';
+
+      _errorMsg.textContent = _errorText;
+    }
+
+    _debug["default"].error(error);
+
+    (0, _commerceUtils.triggerRender)(null);
+  });
+};
+
 var register = function register(handlerProxy) {
   handlerProxy.on('submit', addToCartFormEventTargetMatcher, handleAtcSubmit);
   handlerProxy.on('change', addToCartOptionSelectEventTargetMatcher, handleAtcOptionSelectChange);
+  handlerProxy.on('click', isBuyNowButtonEvent, handleBuyNow);
   handlerProxy.on('wf-render-tree', Boolean, handleAtcOptionSelectLoad);
 };
 
@@ -61173,8 +61277,8 @@ module.exports = unicodeWords;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WF_TEMPLATE_ID_DATA_KEY = exports.WF_COLLECTION_DATA_KEY = exports.WF_CONDITION_DATA_KEY = exports.WF_BINDING_DATA_KEY = exports.DEFAULT_SKU_SLUG = exports.COMMERCE_PLUGIN_KEY = exports.COMMERCE_CATEGORY_COLLECTION_SLUG = exports.COMMERCE_PRODUCT_FIELD_SLUG = exports.COMMERCE_PRODUCT_COLLECTION_SLUG = exports.COMMERCE_SKU_FIELD_SLUG = exports.COMMERCE_SKU_COLLECTION_SLUG = exports.COMMERCE_CART_ITEM_ID_ATTR = exports.COMMERCE_CART_PUBLISHED_SITE_ACTIONS = exports.COMMERCE_CART_PUBLISHED_SITE_ACTION_ATTR = exports.CART_PRODUCT_ADDED_DEFAULT = exports.CART_PRODUCT_ADDED_KEYPATH = exports.CART_PRODUCT_ADDED_KEY = exports.CART_TYPE_DROPDOWN_ON_OPEN_KEY = exports.CART_TYPE_KEY = exports.CHECKOUT_PLACE_ORDER_LOADING_TEXT_DEFAULT = exports.CHECKOUT_PLACE_ORDER_BUTTON_TEXT_DEFAULT = exports.CART_CHECKOUT_LOADING_TEXT_DEFAULT = exports.CART_CHECKOUT_BUTTON_TEXT_DEFAULT = exports.LOADING_TEXT_DEFAULT = exports.LOADING_TEXT = exports.HIDE_CART_COUNT_DEFAULT = exports.HIDE_CART_COUNT_KEYPATH = exports.HIDE_CART_COUNT_KEY = exports.HIDE_CART_WHEN_EMPTY_DEFAULT = exports.HIDE_CART_WHEN_EMPTY_KEYPATH = exports.HIDE_CART_WHEN_EMPTY_KEY = exports.BILLING_ADDRESS_TOGGLE_DEFAULT = exports.BILLING_ADDRESS_TOGGLE_KEYPATH = exports.BILLING_ADDRESS_TOGGLE_KEY = exports.OPEN_STATE_DEFAULT = exports.OPEN_STATE_KEYPATH = exports.OPEN_STATE_KEY = exports.SHIPPING_METHODS_STATE = exports.CHECKOUT_STATE = exports.QUICK_CHECKOUT_STATE_KEYPATH = exports.QUICK_CHECKOUT_STATE = exports.CART_STATE = exports.STATE = exports.QUANTITY_ENABLED_DEFAULT = exports.QUANTITY_ENABLED = exports.PREVIEW_ITEMS_KEYPATH = exports.PREVIEW_ITEMS_KEY = exports.PREVIEW_ITEMS_DEFAULT = exports.QUICK_CHECKOUT_AUTOMATION = exports.QUICK_CHECKOUT_STATES = exports.CART_COUNT_HIDE_RULES = exports.CART_TYPES = exports.CART_TYPE_DROPDOWN_ON_OPEN = exports.SHIPPING_METHODS_STATES = exports.CHECKOUT_STATES = exports.CART_STATES_AUTOMATION = exports.CART_STATES = exports.ADD_TO_CART_STATES = exports.NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_FORM_CONTAINER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ADDITIONAL_INFO = exports.NODE_TYPE_COMMERCE_CART_APPLE_PAY_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_ACTIONS = exports.NODE_TYPE_COMMERCE_ORDER_CONFIRMATION_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_PLACE_ORDER_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_TOGGLE_CHECKBOX = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_EMPTY_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_LIST = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_CUSTOMER_INFO_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_FORM_CONTAINER = exports.NODE_NAME_COMMERCE_ADD_TO_CART_QUANTITY_INPUT = exports.NODE_TYPE_COMMERCE_CART_FORM = exports.NODE_TYPE_COMMERCE_CART_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_CONTAINER = exports.NODE_TYPE_COMMERCE_CART_CONTAINER_WRAPPER = exports.NODE_TYPE_COMMERCE_CART_CLOSE_LINK = exports.NODE_TYPE_COMMERCE_CART_OPEN_LINK = exports.NODE_TYPE_COMMERCE_CART_WRAPPER = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_LIST = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_SELECT = exports.NODE_TYPE_COMMERCE_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_FORM = exports.DATA_ATTR_COUNT_HIDE_RULE = exports.DATA_ATTR_OPEN_ON_HOVER = exports.DATA_ATTR_OPEN_PRODUCT = exports.DATA_ATTR_LOADING_TEXT = exports.DATA_ATTR_NODE_TYPE = exports.DATA_ATTR_COMMERCE_PRODUCT_ID = exports.DATA_ATTR_COMMERCE_OPTION_SET_ID = exports.DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = exports.DATA_ATTR_COMMERCE_SKU_ID = void 0;
-exports.ORDER_TYPE = exports.CHECKOUT_BINDING_ROOT_QUERY_PATH = exports.symbolMap = exports.EDITABLE_STYLE_NAMES = exports.DATA_ATTR_PUBLISHABLE_KEY = exports.ANIMATION_DURATION_KEYPATH = exports.ANIMATION_DURATION_KEY = exports.ANIMATION_DURATION_DEFAULT = exports.DATA_ATTR_ANIMATION_DURATION = exports.ANIMATION_EASING_KEYPATH = exports.ANIMATION_EASING_KEY = exports.ANIMATION_EASING_DEFAULT = exports.DATA_ATTR_ANIMATION_EASING = exports.ADD_TO_CART_ERRORS = exports.CART_ERRORS = exports.CHECKOUT_ERRORS = exports.WF_SKU_CONDITION_DATA_KEY = exports.WF_SKU_BINDING_DATA_KEY = void 0;
+exports.WF_COLLECTION_DATA_KEY = exports.WF_CONDITION_DATA_KEY = exports.WF_BINDING_DATA_KEY = exports.DEFAULT_SKU_SLUG = exports.COMMERCE_PLUGIN_KEY = exports.COMMERCE_CATEGORY_COLLECTION_SLUG = exports.COMMERCE_PRODUCT_FIELD_SLUG = exports.COMMERCE_PRODUCT_COLLECTION_SLUG = exports.COMMERCE_SKU_FIELD_SLUG = exports.COMMERCE_SKU_COLLECTION_SLUG = exports.COMMERCE_CART_ITEM_ID_ATTR = exports.COMMERCE_CART_PUBLISHED_SITE_ACTIONS = exports.COMMERCE_CART_PUBLISHED_SITE_ACTION_ATTR = exports.CART_PRODUCT_ADDED_DEFAULT = exports.CART_PRODUCT_ADDED_KEYPATH = exports.CART_PRODUCT_ADDED_KEY = exports.CART_TYPE_DROPDOWN_ON_OPEN_KEY = exports.CART_TYPE_KEY = exports.CHECKOUT_PLACE_ORDER_LOADING_TEXT_DEFAULT = exports.CHECKOUT_PLACE_ORDER_BUTTON_TEXT_DEFAULT = exports.CART_CHECKOUT_LOADING_TEXT_DEFAULT = exports.CART_CHECKOUT_BUTTON_TEXT_DEFAULT = exports.LOADING_TEXT_DEFAULT = exports.LOADING_TEXT = exports.HIDE_CART_COUNT_DEFAULT = exports.HIDE_CART_COUNT_KEYPATH = exports.HIDE_CART_COUNT_KEY = exports.HIDE_CART_WHEN_EMPTY_DEFAULT = exports.HIDE_CART_WHEN_EMPTY_KEYPATH = exports.HIDE_CART_WHEN_EMPTY_KEY = exports.BILLING_ADDRESS_TOGGLE_DEFAULT = exports.BILLING_ADDRESS_TOGGLE_KEYPATH = exports.BILLING_ADDRESS_TOGGLE_KEY = exports.OPEN_STATE_DEFAULT = exports.OPEN_STATE_KEYPATH = exports.OPEN_STATE_KEY = exports.SHIPPING_METHODS_STATE = exports.CHECKOUT_STATE = exports.QUICK_CHECKOUT_STATE_KEYPATH = exports.QUICK_CHECKOUT_STATE = exports.CART_STATE = exports.STATE = exports.QUANTITY_ENABLED_DEFAULT = exports.QUANTITY_ENABLED = exports.PREVIEW_ITEMS_KEYPATH = exports.PREVIEW_ITEMS_KEY = exports.PREVIEW_ITEMS_DEFAULT = exports.QUICK_CHECKOUT_AUTOMATION = exports.QUICK_CHECKOUT_STATES = exports.CART_COUNT_HIDE_RULES = exports.CART_TYPES = exports.CART_TYPE_DROPDOWN_ON_OPEN = exports.SHIPPING_METHODS_STATES = exports.CHECKOUT_STATES = exports.CART_STATES_AUTOMATION = exports.CART_STATES = exports.ADD_TO_CART_STATES = exports.NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = exports.NODE_TYPE_COMMERCE_BUY_NOW_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_PAYPAL_CHECKOUT_FORM_CONTAINER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ADDITIONAL_INFO = exports.NODE_TYPE_COMMERCE_CART_APPLE_PAY_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_QUICK_CHECKOUT_ACTIONS = exports.NODE_TYPE_COMMERCE_ORDER_CONFIRMATION_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_ERROR_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_PLACE_ORDER_BUTTON = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_TOGGLE_CHECKBOX = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_EMPTY_STATE = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_LIST = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_METHODS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_BILLING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_SHIPPING_ADDRESS_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_CUSTOMER_INFO_WRAPPER = exports.NODE_TYPE_COMMERCE_CHECKOUT_FORM_CONTAINER = exports.NODE_NAME_COMMERCE_ADD_TO_CART_QUANTITY_INPUT = exports.NODE_TYPE_COMMERCE_CART_FORM = exports.NODE_TYPE_COMMERCE_CART_CHECKOUT_BUTTON = exports.NODE_TYPE_COMMERCE_CART_CONTAINER = exports.NODE_TYPE_COMMERCE_CART_CONTAINER_WRAPPER = exports.NODE_TYPE_COMMERCE_CART_CLOSE_LINK = exports.NODE_TYPE_COMMERCE_CART_OPEN_LINK = exports.NODE_TYPE_COMMERCE_CART_WRAPPER = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_LIST = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_OPTION_SELECT = exports.NODE_TYPE_COMMERCE_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_ERROR = exports.NODE_TYPE_COMMERCE_ADD_TO_CART_FORM = exports.DATA_ATTR_COUNT_HIDE_RULE = exports.DATA_ATTR_OPEN_ON_HOVER = exports.DATA_ATTR_OPEN_PRODUCT = exports.DATA_ATTR_LOADING_TEXT = exports.DATA_ATTR_NODE_TYPE = exports.DATA_ATTR_COMMERCE_PRODUCT_ID = exports.DATA_ATTR_COMMERCE_OPTION_SET_ID = exports.DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = exports.DATA_ATTR_COMMERCE_SKU_ID = void 0;
+exports.ORDER_TYPE = exports.CHECKOUT_BINDING_ROOT_QUERY_PATH = exports.symbolMap = exports.EDITABLE_STYLE_NAMES = exports.DATA_ATTR_PUBLISHABLE_KEY = exports.ANIMATION_DURATION_KEYPATH = exports.ANIMATION_DURATION_KEY = exports.ANIMATION_DURATION_DEFAULT = exports.DATA_ATTR_ANIMATION_DURATION = exports.ANIMATION_EASING_KEYPATH = exports.ANIMATION_EASING_KEY = exports.ANIMATION_EASING_DEFAULT = exports.DATA_ATTR_ANIMATION_EASING = exports.ADD_TO_CART_ERRORS = exports.CART_ERRORS = exports.CHECKOUT_ERRORS = exports.WF_SKU_CONDITION_DATA_KEY = exports.WF_SKU_BINDING_DATA_KEY = exports.WF_TEMPLATE_ID_DATA_KEY = void 0;
 var DATA_ATTR_COMMERCE_SKU_ID = 'data-commerce-sku-id';
 exports.DATA_ATTR_COMMERCE_SKU_ID = DATA_ATTR_COMMERCE_SKU_ID;
 var DATA_ATTR_COMMERCE_PRODUCT_CURRENT_SKU_VALUES = 'data-commerce-product-sku-values';
@@ -61260,6 +61364,8 @@ var NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = 'commerce-checkout-discount-form
 exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM = NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_FORM;
 var NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = 'commerce-checkout-discount-input';
 exports.NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT = NODE_TYPE_COMMERCE_CHECKOUT_DISCOUNT_INPUT;
+var NODE_TYPE_COMMERCE_BUY_NOW_BUTTON = 'commerce-buy-now-button';
+exports.NODE_TYPE_COMMERCE_BUY_NOW_BUTTON = NODE_TYPE_COMMERCE_BUY_NOW_BUTTON;
 var NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = 'commerce-downloads-button';
 exports.NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON = NODE_TYPE_COMMERCE_DOWNLOADS_BUTTON;
 var ADD_TO_CART_STATES = {
@@ -61542,9 +61648,19 @@ var ADD_TO_CART_ERRORS = {
   },
   GENERAL: {
     id: ADD_TO_CART_GENERAL_ERR,
-    name: 'General error',
+    name: 'Add to Cart error',
     copy: 'Something went wrong when adding this item to the cart.',
     path: ['data', 'commerce', ADD_TO_CART_GENERAL_ERR]
+  },
+  BUY_NOW: {
+    id: 'BUY_NOW_ERROR',
+    name: 'Buy now error',
+    copy: 'Something went wrong when trying to purchase this item.'
+  },
+  CHECKOUT_DISABLED: {
+    id: 'CHECKOUT_DISABLED_ERROR',
+    name: 'Checkout disabled',
+    copy: 'Checkout is disabled on this site.'
   }
 };
 exports.ADD_TO_CART_ERRORS = ADD_TO_CART_ERRORS;
@@ -62913,7 +63029,7 @@ var getTokenPath = function getTokenPath(tokenString) {
 };
 
 var isTokenPathWithValidPattern = function isTokenPathWithValidPattern(tokenPath) {
-  return /[^a-z0-1-:]/.test(tokenPath) === false;
+  return /[^a-z0-9-:]/.test(tokenPath) === false;
 };
 
 function getTokenUsages(text, tokenOptions) {
@@ -71744,7 +71860,7 @@ var handlePlaceOrder = function handlePlaceOrder(event, apolloClient) {
 // don't support vw/vh, we get the 100% instead
 
 
-var iframeStyle = "\n  display: block;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  width: 100vw;\n  height: 100vh;\n  min-width: 100%;\n  min-height: 100%;\n  max-width: 100%;\n  max-height: 100%;\n  z-index: 2147483647;\n  border: 0;\n  background-color: #ffffff;\n";
+var iframeStyle = "\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  width: 100vw;\n  height: 100vh;\n  min-width: 100%;\n  min-height: 100%;\n  max-width: 100%;\n  max-height: 100%;\n  z-index: 2147483647;\n  border: 0;\n  background-color: #ffffff;\n";
 
 var createConfirmationIframe = function createConfirmationIframe(actions) {
   var documentRoot = document.documentElement; // we use this instead of document.body to appease the flow gods
@@ -71758,11 +71874,16 @@ var createConfirmationIframe = function createConfirmationIframe(actions) {
   var iframe = document.createElement('iframe');
   iframe.setAttribute('style', iframeStyle);
   iframe.setAttribute('src', '/paypal-checkout');
-  documentBody.appendChild(iframe);
+
+  if (!documentBody.parentNode) {
+    return;
+  }
+
+  documentBody.parentNode.appendChild(iframe);
   var previousRootOverflow = documentRoot.style.overflow;
   documentRoot.style.overflow = 'hidden';
-  var previousBodyOverflow = documentBody.style.overflow;
-  documentBody.style.overflow = 'hidden';
+  var previousBodyDisplay = documentBody.style.display;
+  documentBody.style.display = 'none';
 
   var paypalMessageHandler = function paypalMessageHandler(event) {
     if (event.origin !== window.location.origin) {
@@ -71790,13 +71911,16 @@ var createConfirmationIframe = function createConfirmationIframe(actions) {
         documentRoot.style.overflow = '';
       }
 
-      if (previousBodyOverflow) {
-        documentBody.style.overflow = previousBodyOverflow;
+      if (previousBodyDisplay) {
+        documentBody.style.display = previousBodyDisplay;
       } else {
-        documentBody.style.overflow = '';
+        documentBody.style.display = '';
       }
 
-      documentBody.removeChild(iframe);
+      if (documentBody.parentNode) {
+        documentBody.parentNode.removeChild(iframe);
+      }
+
       actions.restart();
     }
   };
